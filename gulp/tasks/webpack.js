@@ -5,7 +5,6 @@ let path = require('path');
 
 let APP_PATH = path.join(__dirname, '../../');
 let entry = path.join(APP_PATH, './views/components/app.js');
-console.log(entry)
 
 module.exports = function (gulp, config) {
 

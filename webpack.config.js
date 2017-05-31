@@ -1,11 +1,13 @@
-var webpack = require('webpack');
+let webpack = require('webpack');
+let path = require('path');
+
 
 module.exports = {
   entry: {
     bundle: ['./views/components/app.js']
   },
   output: {
-    path: __dirname,
+    path: path.join(__dirname, 'views'),
     filename: '[name].js'
   },
   module: {
