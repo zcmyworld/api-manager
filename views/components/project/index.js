@@ -21,7 +21,7 @@ class Node extends Reflux.Component {
       <div>
         <span>POST</span>
         <span>/pet</span>
-        <span>这个接口的一些描述</span>
+        <span>这个接口的一些描述11</span>
       </div>
     );
   };

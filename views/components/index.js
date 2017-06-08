@@ -1,46 +1,43 @@
 import React from 'react';
-import Reflux from 'reflux';
-import ReactMixin from 'react-mixin';
+import ReactDom from 'react-dom';
+import {HashRouter, Route, Link} from 'react-router-dom';
 
-import { Layout, Menu, Breadcrumb } from 'antd';
+import {Row, Col, Card, Layout, Menu, Breadcrumb } from 'antd';
 let { Header, Content, Footer } = Layout;
 
+import ProjectList from './project_list/index.js';
+
+import Project from './project/index.js';
 
 
-let Actions = Reflux.createActions(['list']);
-
-class Store extends Reflux.Store {
-  constructor() {
-    super();
-    this.state = {
-      hello: 1
-    }
-    this.listenables = Actions;
-  }
-
-  onList() {
-    console.log('onList')
-    this.setState({
-      hello: 2
-    })
-  }
-}
-
-export default class Index extends Reflux.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-    this.store = Store;
-    setTimeout(function () {
-      console.log("time!");
-      Actions.list();
-    }, 3000)
-  }
-  render() {
-    return (
-      <div>
-        <div>{this.state.hello}</div>
+ReactDom.render((
+  <Layout className="layout">
+    <Header>
+      <Menu
+        mode="horizontal"
+        theme="dark"
+        style={{ lineHeight: '64px' }}
+        >
+        <Menu.Item key="project">Project</Menu.Item>
+      </Menu>
+    </Header>
+    <Content style={{ padding: '0 50px' }}>
+      <Breadcrumb style={{ margin: '12px 0' }}>
+        <Breadcrumb.Item>Home</Breadcrumb.Item>
+        <Breadcrumb.Item>List</Breadcrumb.Item>
+        <Breadcrumb.Item>App</Breadcrumb.Item>
+      </Breadcrumb>
+      <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
+        <HashRouter>
+          <div>
+            <Route exact path="/project_list" component={ProjectList}></Route>
+            <Route exact path="/project" component={Project}></Route>
+          </div>
+        </HashRouter>
       </div>
-    );
-  };
-}
+    </Content>
+    <Footer style={{ textAlign: 'center' }}>
+      Ant Design ©2016 Created by Ant UED
+    </Footer>
+  </Layout>
+), document.querySelector('#view'));
