@@ -112,7 +112,7 @@ ReactDom.render((
         <Breadcrumb.Item>List</Breadcrumb.Item>
         <Breadcrumb.Item>App</Breadcrumb.Item>
       </Breadcrumb>
-      <div style={{ background: '#fff', padding: 24, minHeight: 1080 }}>
+      <Row style={{ background: '#fff', padding: 24, minHeight: 1080, paddingBottom: 100 }}>
         <Col span={3}>
           <Menu
             theme='Light'
@@ -143,13 +143,23 @@ ReactDom.render((
           </Menu>
         </Col>
         <Col span={21}>
-          <div style={{ 'height': '30px', 'lineHeight': '30px' }}>
-            <div style={{ 'marginLeft': '30px' }}>
+          <div style={{ 'marginLeft': '30px' }}>
+            <Row>
               <h1>用户列表</h1>
+            </Row>
+            <Row>
               <div>获取用户列表</div>
+            </Row>
+            <Row  className='api-title'>
               <h2>调用地址: /hello/world</h2>
+            </Row>
+            <Row className='api-title'>
               <h2>调用方式: GET</h2>
+            </Row>
+            <Row className='api-title'>
               <h2>Request Headers</h2>
+            </Row>
+            <Row>
               <Table
                 dataSource={dataSource}
                 columns={columns}
@@ -157,9 +167,13 @@ ReactDom.render((
                 size='small'
                 pagination={false}
                 />
+            </Row>
+            <Row className='api-title'>
               <h2>
                 Request Body
               </h2>
+            </Row>
+            <Row>
               <Table
                 dataSource={dataSource}
                 columns={columns}
@@ -167,9 +181,17 @@ ReactDom.render((
                 size='small'
                 pagination={false}
                 />
+            </Row>
+            <Row className='api-title'>
               <h2>Response</h2>
+            </Row>
+            <Row className='api-title'>
               <h2>正确返回</h2>
+            </Row>
+            <Row className='api-title'>
               <h2>Response Header</h2>
+            </Row>
+            <Row>
               <Table
                 dataSource={dataSource}
                 columns={columns}
@@ -177,13 +199,25 @@ ReactDom.render((
                 size='small'
                 pagination={false}
                 />
+            </Row>
+            <Row className='api-title'>
+              <h2>Response Body</h2>
+            </Row>
+            <Row>
               <pre>
                 {'{'}{'\n'}
                 {'  '}hello: 1{'\n'}
                 {'  '}world: 1{'\n'}
                 {'}'}
               </pre>
+            </Row>
+            <Row className='api-title'>
               <h2>错误返回</h2>
+            </Row>
+            <Row className='api-title'>
+              <h2>Response Header</h2>
+            </Row>
+            <Row>
               <Table
                 dataSource={dataSource}
                 columns={columns}
@@ -191,20 +225,23 @@ ReactDom.render((
                 size='small'
                 pagination={false}
                 />
+            </Row>
+            <Row className='api-title'>
+              <h2>Response Body</h2>
+            </Row>
+            <Row>
               <pre>
                 {'{'}{'\n'}
                 {'  '}hello: 1{'\n'}
                 {'  '}world: 1{'\n'}
                 {'}'}
               </pre>
-              <div>helloworld</div>
-            </div>
+            </Row>
           </div>
         </Col>
-      </div>
+      </Row>
     </Content>
     <Footer style={{ textAlign: 'center' }}>
-      Ant Design ©2016 Created by Ant UED
     </Footer>
   </Layout>
 ), document.querySelector('#view'));
