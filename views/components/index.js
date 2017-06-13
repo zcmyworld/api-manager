@@ -1,43 +1,39 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import {HashRouter, Route, Link} from 'react-router-dom';
+import { Router, Route, Link, hashHistory } from 'react-router';
+import { Breadcrumb, Alert } from 'antd';
 
-import {Row, Col, Card, Layout, Menu, Breadcrumb } from 'antd';
-let { Header, Content, Footer } = Layout;
+const Apps = () => (
+  <ul className="app-list">
+    <li>
+      <Link to="/apps/1">Application1</Link>：<Link to="/apps/1/detail">Detail</Link>
+    </li>
+    <li>
+      <Link to="/apps/2">Application2</Link>：<Link to="/apps/2/detail">Detail</Link>
+    </li>
+  </ul>
+);
 
-import ProjectList from './project_list/index.js';
+const Home = ({ routes, params, children }) => (
+  <div className="demo">
+    <div className="demo-nav">
+      <Link to="/">Home</Link>
+      <Link to="/apps">Application List</Link>
+    </div>
+    {children || 'Home Page'}
+    <Alert style={{ margin: '16px 0' }} message="Click the navigation above to switch:" />
+    <Breadcrumb routes={routes} params={params} />
+  </div>
+);
 
-import Project from './project/index.js';
-
-
-ReactDom.render((
-  <Layout className="layout">
-    <Header>
-      <Menu
-        mode="horizontal"
-        theme="dark"
-        style={{ lineHeight: '64px' }}
-        >
-        <Menu.Item key="project">Project</Menu.Item>
-      </Menu>
-    </Header>
-    <Content style={{ padding: '0 50px' }}>
-      <Breadcrumb style={{ margin: '12px 0' }}>
-        <Breadcrumb.Item>Home</Breadcrumb.Item>
-        <Breadcrumb.Item>List</Breadcrumb.Item>
-        <Breadcrumb.Item>App</Breadcrumb.Item>
-      </Breadcrumb>
-      <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
-        <HashRouter>
-          <div>
-            <Route exact path="/project_list" component={ProjectList}></Route>
-            <Route exact path="/project" component={Project}></Route>
-          </div>
-        </HashRouter>
-      </div>
-    </Content>
-    <Footer style={{ textAlign: 'center' }}>
-      Ant Design ©2016 Created by Ant UED
-    </Footer>
-  </Layout>
-), document.querySelector('#view'));
+ReactDOM.render(
+  <Router history={hashHistory}>
+    <Route name="home" breadcrumbName="Home" path="/" component={Home}>
+      <Route name="apps" breadcrumbName="Application List" path="apps" component={Apps}>
+        <Route name="app" breadcrumbName="Application:id" path=":id">
+          <Route name="detail" breadcrumbName="Detail" path="detail" />
+        </Route>
+      </Route>
+    </Route>
+  </Router>
+, document.querySelector('#view'));

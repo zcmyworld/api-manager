@@ -1,6 +1,8 @@
 let Koa = require('koa');
 let app = new Koa();
 
+let cors = require('koa-cors');
+
 let bodyParser = require('koa-bodyparser');
 
 let router = require('koa-router')({});
@@ -11,6 +13,8 @@ let APP_PATH = __dirname;
 
 
 let routerHandler = require('./app/routes/web')
+
+app.use(cors());
 
 app.use(bodyParser());
 
@@ -41,6 +45,8 @@ routerHandler(router);
 app
   .use(router.routes())
   .use(router.allowedMethods());
+
+
 
 
 if (module.parent) {

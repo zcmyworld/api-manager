@@ -5,39 +5,41 @@ import ReactMixin from 'react-mixin';
 import { HashRouter, Route, Link } from 'react-router-dom';
 let { Header, Content, Footer } = Layout;
 
+import Project from '../project/index.js';
+import Action from './action';
+import Store from './store';
+
 export default class Index extends Reflux.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      current: 'project'
-    }
+    this.stores = [Store];
   }
+
+  componentDidMount() {
+    Action.list();
+  }
+
   render() {
-    console.log(this.props)
     return (
       <div>
-        <Breadcrumb style={{ margin: '12px 24px' }}>
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb>
+        <Breadcrumb
+          style={{ margin: '12px 24px' }}
+          routes={[{ breadcrumbName: 'Home', name: 'home', path: '/projects' }]}/>
         <Row style={{ background: '#fff', padding: 24, minHeight: 1080, paddingBottom: 100 }}>
           <Row gutter={16}>
-            <Col span={4} >
-              <Card >
-                <h1>课程工具</h1>
-                <p>更新时间</p>
-                <p>2017-1-2 13: 24</p>
-              </Card>
-            </Col>
-            <Col span={4} >
-              <Card >
-                <h1><Link to='/project'>用户系统</Link></h1>
-                <p>更新时间</p>
-                <p>2017-1-2 13: 24</p>
-              </Card>
-            </Col>
+            {
+              this.state.projects && this.state.projects.map((item, idx) => {
+                return (
+                  <Col span={4} key={idx}>
+                    <Card >
+                      <h1><Link to='/projects/1'>{item.name}</Link></h1>
+                      <p>更新时间</p>
+                      <p>2017-1-2 13: 24</p>
+                    </Card>
+                  </Col>
+                )
+              })
+            }
           </Row>
         </Row>
       </div>

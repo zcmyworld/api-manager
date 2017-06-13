@@ -104,8 +104,8 @@ ReactDom.render((
     <Content style={{ padding: '0 50px' }}>
       <HashRouter>
         <div>
-          <Route exact path="/projects" component={ProjectList} breadcrumbName="Home"></Route>
-          <Route exact path="/project" component={Project}></Route>
+          <Route exact path="/projects" component={ProjectList} hello="world"></Route>
+          <Route exact path="/projects/:projectId" component={Project}></Route>
         </div>
       </HashRouter>
     </Content>

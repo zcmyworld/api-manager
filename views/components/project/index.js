@@ -105,11 +105,9 @@ export default class Index extends Reflux.Component {
   render() {
     return (
       <div>
-        <Breadcrumb style={{ margin: '12px 24px' }}>
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb>
+        <Breadcrumb
+          style={{ margin: '12px 24px' }}
+          routes={[{ breadcrumbName: 'Home', name: 'home', path: '/projects' }, { breadcrumbName: '项目名称', path: '/123' }]}/>
         <Row style={{ background: '#fff', padding: 24, minHeight: 1080, paddingBottom: 100 }}>
           <Col span={3}>
             <Menu
