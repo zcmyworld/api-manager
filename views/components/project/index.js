@@ -5,9 +5,11 @@ import ReactMixin from 'react-mixin';
 import { HashRouter, Route, Link } from 'react-router-dom';
 
 import { Row, Col, Card, Layout, Menu, Breadcrumb, Icon, Table, Collapse } from 'antd';
-let { Header, Content, Footer } = Layout;
+const { Header, Content, Footer } = Layout;
 
 const SubMenu = Menu.SubMenu;
+import Action from './action';
+import Store from './store';
 
 const reqHeaderColumns = [
   {
@@ -70,39 +72,20 @@ const dataSource = [
   }
 ];
 
-let Panel = Collapse.Panel;
-
-
-const customPanelStyle = {
-  background: '#f7f7f7',
-  borderRadius: 4,
-  marginBottom: 24,
-  border: 0,
-};
-class Node extends Reflux.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <div>
-        <span>POST</span>
-        <span>/pet</span>
-        <span>这个接口的一些描述11</span>
-      </div>
-    );
-  };
-}
 
 export default class Index extends Reflux.Component {
   constructor(props) {
     super(props);
-    console.log(this.props)
-    this.state = {
-      current: 'project'
-    }
+    this.stores = [Store];
+
   }
+
+  componentDidMount() {
+    // Action.info(1);
+  }
+
   render() {
+    console.log(this.state)
     return (
       <div>
         <Breadcrumb

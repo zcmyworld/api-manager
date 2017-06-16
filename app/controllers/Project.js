@@ -1,29 +1,55 @@
 class Project {
 
   async show(ctx) {
+    let projectId = ctx.params.projectId;
     ctx.body = [{
-      method: 'POST',
-      route: '/pet',
-      des: 'sdfasdjflkasdjflk',
-      reqHead: {
-        'Cache-Control': 'no-cache'
-      },
-      reqBody: {
-        hello: 1
-      },
-      resHead: {
-        'Cache-Control': 'no-cache'
-      },
-      resBody: [
+      title: '项目列表',
+      method: 'GET',
+      route: '/projects',
+      des: '获取项目列表',
+      reqHead: [
         {
-          code: 200,
+          arg: 'custom-lang',
+          des: '客户端当前的语言',
+          defVal: 'zh'
+        },
+        {
+          arg: 'custom-id',
+          des: '用户id',
+          defVal: '-'
+        }
+      ],
+      reqBody: [{
+        arg: 'projectId',
+        des: '项目id',
+        type: 'string',
+        defVal: '必填'
+      }],
+      res: [
+        {
+          type: '正确返回',
+          header: {
+            arg: 'token',
+            des: '获取成功的令牌',
+          },
+          body: [
+            {
+              name: '项目１',
+              updated: '2017-3-2 13:12'
+            }, {
+              name: '项目２',
+              updated: '2017-3-2 13:12'
+            }
+          ]
+        },
+        {
+          type: '错误返回',
+          header: {
+            arg: 'token',
+            des: '获取成功的令牌',
+          },
           body: {
-            hello: 1
-          }
-        }, {
-          code: 404,
-          body: {
-            world: 1
+            error: 'error projectId'
           }
         }
       ]

@@ -5,7 +5,6 @@ import ReactMixin from 'react-mixin';
 import { HashRouter, Route, Link } from 'react-router-dom';
 let { Header, Content, Footer } = Layout;
 
-import Project from '../project/index.js';
 import Action from './action';
 import Store from './store';
 
@@ -31,11 +30,13 @@ export default class Index extends Reflux.Component {
               this.state.projects && this.state.projects.map((item, idx) => {
                 return (
                   <Col span={4} key={idx}>
-                    <Card >
-                      <h1><Link to='/projects/1'>{item.name}</Link></h1>
-                      <p>更新时间</p>
-                      <p>2017-1-2 13: 24</p>
-                    </Card>
+                    <Link to='/projects/1'>
+                      <Card >
+                        <h1>{item.name}</h1>
+                        <p>更新时间</p>
+                        <p>{item.updated}</p>
+                      </Card>
+                    </Link>
                   </Col>
                 )
               })
