@@ -16760,24 +16760,6 @@ module.exports = { "default": __webpack_require__(385), __esModule: true };
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_request__ = __webpack_require__(498);
 
 
-// export function fetch({ page }) {
-//   return request(`/api/users?_page=${page}&_limit=${PAGE_SIZE}`);
-// }
-
-// export function remove(id) {
-//   return request(`/api/users/${id}`, {
-//     method: 'DELETE',
-//   });
-// }
-
-// export function patch(id, values) {
-//   return request(`/api/users/${id}`, {
-//     method: 'PATCH',
-//     body: JSON.stringify(values),
-//   });
-// }
-
-
 class Project {
   list() {
     return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utils_request__["a" /* default */])('/projects').then(res => {
@@ -51128,57 +51110,56 @@ const SubMenu = __WEBPACK_IMPORTED_MODULE_4_antd_lib_menu___default.a.SubMenu;
 
 
 
-const reqHeaderColumns = [{
-  title: 'headerKey',
-  dataIndex: 'headerKey',
-  key: 'headerKey'
-}, {
-  title: 'headerValue',
-  dataIndex: 'headerValue',
-  key: 'headerValue'
-}];
-
-const reqHeaderDataSource = [{
-  key: '1',
-  headerKey: 'userName',
-  headerValue: 'userName'
-}, {
-  key: '2',
-  headerKey: 'userName',
-  headerValue: 'userName'
-
-}];
-
-const columns = [{
+const REQ_BODY_COLUMN = [{
   title: '参数',
-  dataIndex: 'argument',
-  key: 'argument'
+  dataIndex: 'arg',
+  key: 'arg'
 }, {
   title: '说明',
-  dataIndex: 'description',
-  key: 'description'
+  dataIndex: 'des',
+  key: 'des'
 }, {
   title: '类型',
   dataIndex: 'type',
   key: 'type'
 }, {
+  title: '可选',
+  dataIndex: 'optional',
+  key: 'optional'
+
+}, {
   title: '默认值',
-  dataIndex: 'defaultValue',
-  key: 'defaultValue'
+  dataIndex: 'defVal',
+  key: 'defVal'
 }];
 
-const dataSource = [{
-  key: '1',
-  argument: 'userName',
-  description: '用户名',
-  type: 'string',
-  defaultValue: '-'
+const REQ_HEADER_COLUMN = [{
+  title: '参数',
+  dataIndex: 'arg',
+  key: 'arg'
 }, {
-  key: '2',
-  argument: 'password',
-  description: '密码',
-  type: 'string',
-  defaultValue: '-'
+  title: '说明',
+  dataIndex: 'des',
+  key: 'des'
+}, {
+  title: '可选',
+  dataIndex: 'optional',
+  key: 'optional'
+
+}, {
+  title: '默认值',
+  dataIndex: 'defVal',
+  key: 'defVal'
+}];
+
+const RES_HEADER_COLUMN = [{
+  title: '参数',
+  dataIndex: 'arg',
+  key: 'arg'
+}, {
+  title: '说明',
+  dataIndex: 'des',
+  key: 'des'
 }];
 
 class Index extends __WEBPACK_IMPORTED_MODULE_7_reflux___default.a.Component {
@@ -51188,11 +51169,35 @@ class Index extends __WEBPACK_IMPORTED_MODULE_7_reflux___default.a.Component {
   }
 
   componentDidMount() {
-    // Action.info(1);
+    __WEBPACK_IMPORTED_MODULE_10__action__["a" /* default */].info(1);
   }
 
   render() {
-    console.log(this.state);
+    if (!this.state.project) {
+      return null;
+    }
+    let reqHeadData = [];
+    this.state.project.reqHead.map((item, idx) => {
+      reqHeadData.push({
+        key: idx,
+        arg: item.arg,
+        des: item.des
+      });
+    });
+    console.log(reqHeadData);
+    let reqBodyData = [];
+    this.state.project.reqBody.map((item, idx) => {
+      reqBodyData.push({
+        key: idx,
+        arg: item.arg,
+        type: item.type,
+        des: item.des,
+        defVal: item.defVal,
+        optional: item.optional
+      });
+    });
+    console.log(reqBodyData);
+
     return __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
       'div',
       null,
@@ -51327,7 +51332,7 @@ class Index extends __WEBPACK_IMPORTED_MODULE_7_reflux___default.a.Component {
               __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
                 'h1',
                 null,
-                '\u7528\u6237\u5217\u8868'
+                this.state.project.title
               )
             ),
             __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
@@ -51336,7 +51341,7 @@ class Index extends __WEBPACK_IMPORTED_MODULE_7_reflux___default.a.Component {
               __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
                 'div',
                 null,
-                '\u83B7\u53D6\u7528\u6237\u5217\u8868'
+                this.state.project.des
               )
             ),
             __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
@@ -51345,7 +51350,8 @@ class Index extends __WEBPACK_IMPORTED_MODULE_7_reflux___default.a.Component {
               __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
                 'h2',
                 null,
-                '\u8C03\u7528\u5730\u5740: /hello/world'
+                '\u8C03\u7528\u5730\u5740: ',
+                this.state.project.route
               )
             ),
             __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
@@ -51354,7 +51360,8 @@ class Index extends __WEBPACK_IMPORTED_MODULE_7_reflux___default.a.Component {
               __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
                 'h2',
                 null,
-                '\u8C03\u7528\u65B9\u5F0F: GET'
+                '\u8C03\u7528\u65B9\u5F0F: ',
+                this.state.project.method
               )
             ),
             __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
@@ -51370,8 +51377,8 @@ class Index extends __WEBPACK_IMPORTED_MODULE_7_reflux___default.a.Component {
               __WEBPACK_IMPORTED_MODULE_1_antd_lib_row___default.a,
               null,
               __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0_antd_lib_table___default.a, {
-                dataSource: dataSource,
-                columns: columns,
+                dataSource: reqHeadData,
+                columns: REQ_HEADER_COLUMN,
                 bordered: true,
                 size: 'small',
                 pagination: false
@@ -51390,131 +51397,12 @@ class Index extends __WEBPACK_IMPORTED_MODULE_7_reflux___default.a.Component {
               __WEBPACK_IMPORTED_MODULE_1_antd_lib_row___default.a,
               null,
               __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0_antd_lib_table___default.a, {
-                dataSource: dataSource,
-                columns: columns,
+                dataSource: reqBodyData,
+                columns: REQ_BODY_COLUMN,
                 bordered: true,
                 size: 'small',
                 pagination: false
               })
-            ),
-            __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_antd_lib_row___default.a,
-              { className: 'api-title' },
-              __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
-                'h2',
-                null,
-                'Response'
-              )
-            ),
-            __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_antd_lib_row___default.a,
-              { className: 'api-title' },
-              __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
-                'h2',
-                null,
-                '\u6B63\u786E\u8FD4\u56DE'
-              )
-            ),
-            __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_antd_lib_row___default.a,
-              { className: 'api-title' },
-              __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
-                'h2',
-                null,
-                'Response Header'
-              )
-            ),
-            __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_antd_lib_row___default.a,
-              null,
-              __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0_antd_lib_table___default.a, {
-                dataSource: dataSource,
-                columns: columns,
-                bordered: true,
-                size: 'small',
-                pagination: false
-              })
-            ),
-            __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_antd_lib_row___default.a,
-              { className: 'api-title' },
-              __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
-                'h2',
-                null,
-                'Response Body'
-              )
-            ),
-            __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_antd_lib_row___default.a,
-              null,
-              __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
-                'pre',
-                null,
-                '{',
-                '\n',
-                '  ',
-                'hello: 1',
-                '\n',
-                '  ',
-                'world: 1',
-                '\n',
-                '}'
-              )
-            ),
-            __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_antd_lib_row___default.a,
-              { className: 'api-title' },
-              __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
-                'h2',
-                null,
-                '\u9519\u8BEF\u8FD4\u56DE'
-              )
-            ),
-            __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_antd_lib_row___default.a,
-              { className: 'api-title' },
-              __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
-                'h2',
-                null,
-                'Response Header'
-              )
-            ),
-            __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_antd_lib_row___default.a,
-              null,
-              __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0_antd_lib_table___default.a, {
-                dataSource: dataSource,
-                columns: columns,
-                bordered: true,
-                size: 'small',
-                pagination: false
-              })
-            ),
-            __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_antd_lib_row___default.a,
-              { className: 'api-title' },
-              __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
-                'h2',
-                null,
-                'Response Body'
-              )
-            ),
-            __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_antd_lib_row___default.a,
-              null,
-              __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
-                'pre',
-                null,
-                '{',
-                '\n',
-                '  ',
-                'hello: 1',
-                '\n',
-                '  ',
-                'world: 1',
-                '\n',
-                '}'
-              )
             )
           )
         )
@@ -51546,7 +51434,7 @@ class Store extends __WEBPACK_IMPORTED_MODULE_0_reflux___default.a.Store {
   }
 
   onInfo(projectId) {
-    __WEBPACK_IMPORTED_MODULE_2__services_Project__["a" /* default */].Info(projectId).then(project => {
+    __WEBPACK_IMPORTED_MODULE_2__services_Project__["a" /* default */].info(projectId).then(project => {
       this.setState({
         project: project
       });

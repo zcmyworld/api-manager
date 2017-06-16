@@ -10,7 +10,7 @@ export default class Store extends Reflux.Store {
   }
 
   onInfo(projectId) {
-    Service.Info(projectId).then((project) => {
+    Service.info(projectId).then((project) => {
       this.setState({
         project: project
       })

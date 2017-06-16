@@ -2,7 +2,7 @@ class Project {
 
   async show(ctx) {
     let projectId = ctx.params.projectId;
-    ctx.body = [{
+    ctx.body = {
       title: '项目列表',
       method: 'GET',
       route: '/projects',
@@ -23,7 +23,8 @@ class Project {
         arg: 'projectId',
         des: '项目id',
         type: 'string',
-        defVal: '必填'
+        defVal: '-',
+        optional: '必填'
       }],
       res: [
         {
@@ -53,7 +54,7 @@ class Project {
           }
         }
       ]
-    }]
+    }
   }
 
   async index(ctx) {

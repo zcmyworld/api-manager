@@ -11,66 +11,68 @@ const SubMenu = Menu.SubMenu;
 import Action from './action';
 import Store from './store';
 
-const reqHeaderColumns = [
-  {
-    title: 'headerKey',
-    dataIndex: 'headerKey',
-    key: 'headerKey'
-  }, {
-    title: 'headerValue',
-    dataIndex: 'headerValue',
-    key: 'headerValue',
-  }
-];
-
-const reqHeaderDataSource = [
-  {
-    key: '1',
-    headerKey: 'userName',
-    headerValue: 'userName',
-  }, {
-    key: '2',
-    headerKey: 'userName',
-    headerValue: 'userName',
-
-  }
-];
-
-const columns = [
+const REQ_BODY_COLUMN = [
   {
     title: '参数',
-    dataIndex: 'argument',
-    key: 'argument'
+    dataIndex: 'arg',
+    key: 'arg'
   }, {
     title: '说明',
-    dataIndex: 'description',
-    key: 'description',
+    dataIndex: 'des',
+    key: 'des',
   }, {
     title: '类型',
     dataIndex: 'type',
     key: 'type',
   }, {
+    title: '可选',
+    dataIndex: 'optional',
+    key: 'optional'
+
+  }, {
     title: '默认值',
-    dataIndex: 'defaultValue',
-    key: 'defaultValue',
+    dataIndex: 'defVal',
+    key: 'defVal',
   }
 ];
 
-const dataSource = [
+const REQ_HEADER_COLUMN = [
   {
-    key: '1',
-    argument: 'userName',
-    description: '用户名',
-    type: 'string',
-    defaultValue: '-'
+    title: '参数',
+    dataIndex: 'arg',
+    key: 'arg'
   }, {
-    key: '2',
-    argument: 'password',
-    description: '密码',
-    type: 'string',
-    defaultValue: '-'
+    title: '说明',
+    dataIndex: 'des',
+    key: 'des',
+   }, {
+    title: '可选',
+    dataIndex: 'optional',
+    key: 'optional'
+
+  }, {
+    title: '默认值',
+    dataIndex: 'defVal',
+    key: 'defVal',
   }
 ];
+
+
+const RES_HEADER_COLUMN = [
+  {
+    title: '参数',
+    dataIndex: 'arg',
+    key: 'arg'
+  }, {
+    title: '说明',
+    dataIndex: 'des',
+    key: 'des',
+  }
+];
+
+
+
+
 
 
 export default class Index extends Reflux.Component {
@@ -81,11 +83,35 @@ export default class Index extends Reflux.Component {
   }
 
   componentDidMount() {
-    // Action.info(1);
+    Action.info(1);
   }
 
   render() {
-    console.log(this.state)
+    if (!this.state.project) {
+      return null;
+    }
+    let reqHeadData = [];
+    this.state.project.reqHead.map((item, idx) => {
+      reqHeadData.push({
+        key: idx,
+        arg: item.arg,
+        des: item.des
+      })
+    })
+    console.log(reqHeadData)
+    let reqBodyData = []
+    this.state.project.reqBody.map((item, idx) => {
+      reqBodyData.push({
+        key: idx,
+        arg: item.arg,
+        type: item.type,
+        des: item.des,
+        defVal: item.defVal,
+        optional: item.optional
+      })
+    })
+    console.log(reqBodyData)
+
     return (
       <div>
         <Breadcrumb
@@ -124,24 +150,24 @@ export default class Index extends Reflux.Component {
           <Col span={21}>
             <div style={{ 'marginLeft': '30px' }}>
               <Row>
-                <h1>用户列表</h1>
+                <h1>{this.state.project.title}</h1>
               </Row>
               <Row>
-                <div>获取用户列表</div>
+                <div>{this.state.project.des}</div>
               </Row>
               <Row  className='api-title'>
-                <h2>调用地址: /hello/world</h2>
+                <h2>调用地址: {this.state.project.route}</h2>
               </Row>
               <Row className='api-title'>
-                <h2>调用方式: GET</h2>
+                <h2>调用方式: {this.state.project.method}</h2>
               </Row>
               <Row className='api-title'>
                 <h2>Request Headers</h2>
               </Row>
               <Row>
                 <Table
-                  dataSource={dataSource}
-                  columns={columns}
+                  dataSource={reqHeadData}
+                  columns={REQ_HEADER_COLUMN}
                   bordered
                   size='small'
                   pagination={false}
@@ -154,68 +180,14 @@ export default class Index extends Reflux.Component {
               </Row>
               <Row>
                 <Table
-                  dataSource={dataSource}
-                  columns={columns}
+                  dataSource={reqBodyData}
+                  columns={REQ_BODY_COLUMN}
                   bordered
                   size='small'
                   pagination={false}
                   />
               </Row>
-              <Row className='api-title'>
-                <h2>Response</h2>
-              </Row>
-              <Row className='api-title'>
-                <h2>正确返回</h2>
-              </Row>
-              <Row className='api-title'>
-                <h2>Response Header</h2>
-              </Row>
-              <Row>
-                <Table
-                  dataSource={dataSource}
-                  columns={columns}
-                  bordered
-                  size='small'
-                  pagination={false}
-                  />
-              </Row>
-              <Row className='api-title'>
-                <h2>Response Body</h2>
-              </Row>
-              <Row>
-                <pre>
-                  {'{'}{'\n'}
-                  {'  '}hello: 1{'\n'}
-                  {'  '}world: 1{'\n'}
-                  {'}'}
-                </pre>
-              </Row>
-              <Row className='api-title'>
-                <h2>错误返回</h2>
-              </Row>
-              <Row className='api-title'>
-                <h2>Response Header</h2>
-              </Row>
-              <Row>
-                <Table
-                  dataSource={dataSource}
-                  columns={columns}
-                  bordered
-                  size='small'
-                  pagination={false}
-                  />
-              </Row>
-              <Row className='api-title'>
-                <h2>Response Body</h2>
-              </Row>
-              <Row>
-                <pre>
-                  {'{'}{'\n'}
-                  {'  '}hello: 1{'\n'}
-                  {'  '}world: 1{'\n'}
-                  {'}'}
-                </pre>
-              </Row>
+
             </div>
           </Col>
         </Row>
