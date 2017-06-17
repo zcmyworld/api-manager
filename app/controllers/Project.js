@@ -29,10 +29,10 @@ class Project {
       res: [
         {
           type: '正确返回',
-          header: {
+          header: [{
             arg: 'token',
             des: '获取成功的令牌',
-          },
+          }],
           body: [
             {
               name: '项目１',
@@ -45,10 +45,10 @@ class Project {
         },
         {
           type: '错误返回',
-          header: {
+          header: [{
             arg: 'token',
             des: '获取成功的令牌',
-          },
+          }],
           body: {
             error: 'error projectId'
           }

@@ -45,7 +45,7 @@ const REQ_HEADER_COLUMN = [
     title: '说明',
     dataIndex: 'des',
     key: 'des',
-   }, {
+  }, {
     title: '可选',
     dataIndex: 'optional',
     key: 'optional'
@@ -98,7 +98,6 @@ export default class Index extends Reflux.Component {
         des: item.des
       })
     })
-    console.log(reqHeadData)
     let reqBodyData = []
     this.state.project.reqBody.map((item, idx) => {
       reqBodyData.push({
@@ -110,7 +109,6 @@ export default class Index extends Reflux.Component {
         optional: item.optional
       })
     })
-    console.log(reqBodyData)
 
     return (
       <div>
@@ -187,6 +185,51 @@ export default class Index extends Reflux.Component {
                   pagination={false}
                   />
               </Row>
+              <Row className='api-title'>
+                <h2>Response</h2>
+              </Row>
+              {
+                this.state.project.res.map((item, idx) => {
+                  let resHeadData = [];
+                  item.header.map((item, idx) => {
+                    resHeadData.push({
+                      key: idx,
+                      arg: item.arg,
+                      des: item.des
+                    })
+                  })
+
+                  return (
+                    <div key={idx}>
+                      <Row className='api-title'>
+                        <h2>{item.type}</h2>
+                      </Row>
+                      <Row className='api-title'>
+                        <h2>Response Header</h2>
+                      </Row>
+                      <Row>
+                        <Table
+                          dataSource={resHeadData}
+                          columns={RES_HEADER_COLUMN}
+                          bordered
+                          size='small'
+                          pagination={false}
+                          />
+                      </Row>
+                      <Row className='api-title'>
+                        <h2>Response Body</h2>
+                      </Row>
+                      <Row>
+                        <pre>
+                        {JSON.stringify(item.body, null, 2)}
+                        </pre>
+                      </Row>
+
+                    </div>
+
+                  )
+                })
+              }
 
             </div>
           </Col>

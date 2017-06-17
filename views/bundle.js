@@ -51184,7 +51184,6 @@ class Index extends __WEBPACK_IMPORTED_MODULE_7_reflux___default.a.Component {
         des: item.des
       });
     });
-    console.log(reqHeadData);
     let reqBodyData = [];
     this.state.project.reqBody.map((item, idx) => {
       reqBodyData.push({
@@ -51196,7 +51195,6 @@ class Index extends __WEBPACK_IMPORTED_MODULE_7_reflux___default.a.Component {
         optional: item.optional
       });
     });
-    console.log(reqBodyData);
 
     return __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
       'div',
@@ -51403,7 +51401,78 @@ class Index extends __WEBPACK_IMPORTED_MODULE_7_reflux___default.a.Component {
                 size: 'small',
                 pagination: false
               })
-            )
+            ),
+            __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_1_antd_lib_row___default.a,
+              { className: 'api-title' },
+              __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
+                'h2',
+                null,
+                'Response'
+              )
+            ),
+            this.state.project.res.map((item, idx) => {
+              let resHeadData = [];
+              item.header.map((item, idx) => {
+                resHeadData.push({
+                  key: idx,
+                  arg: item.arg,
+                  des: item.des
+                });
+              });
+
+              return __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
+                'div',
+                { key: idx },
+                __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_1_antd_lib_row___default.a,
+                  { className: 'api-title' },
+                  __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
+                    'h2',
+                    null,
+                    item.type
+                  )
+                ),
+                __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_1_antd_lib_row___default.a,
+                  { className: 'api-title' },
+                  __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
+                    'h2',
+                    null,
+                    'Response Header'
+                  )
+                ),
+                __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_1_antd_lib_row___default.a,
+                  null,
+                  __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0_antd_lib_table___default.a, {
+                    dataSource: resHeadData,
+                    columns: RES_HEADER_COLUMN,
+                    bordered: true,
+                    size: 'small',
+                    pagination: false
+                  })
+                ),
+                __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_1_antd_lib_row___default.a,
+                  { className: 'api-title' },
+                  __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
+                    'h2',
+                    null,
+                    'Response Body'
+                  )
+                ),
+                __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_1_antd_lib_row___default.a,
+                  null,
+                  __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
+                    'pre',
+                    null,
+                    JSON.stringify(item.body, null, 2)
+                  )
+                )
+              );
+            })
           )
         )
       )
