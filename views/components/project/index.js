@@ -4,7 +4,7 @@ import ReactMixin from 'react-mixin';
 
 import { HashRouter, Route, Link } from 'react-router-dom';
 
-import { Row, Col, Card, Layout, Menu, Breadcrumb, Icon, Table, Collapse } from 'antd';
+import { Row, Col, Card, Layout, Menu, Breadcrumb, Icon, Table, Collapse, Button } from 'antd';
 const { Header, Content, Footer } = Layout;
 
 const SubMenu = Menu.SubMenu;
@@ -148,7 +148,8 @@ export default class Index extends Reflux.Component {
           <Col span={21}>
             <div style={{ 'marginLeft': '30px' }}>
               <Row>
-                <h1>{this.state.project.title}</h1>
+                <Col style={{'float': 'left'}}><h1>{this.state.project.title}</h1></Col>
+                <Col style={{'float': 'right'}}><Button type="primary" size="large">Mock</Button></Col>
               </Row>
               <Row>
                 <div>{this.state.project.des}</div>
@@ -221,7 +222,7 @@ export default class Index extends Reflux.Component {
                       </Row>
                       <Row>
                         <pre>
-                        {JSON.stringify(item.body, null, 2)}
+                          {JSON.stringify(item.body, null, 2) }
                         </pre>
                       </Row>
 
