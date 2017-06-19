@@ -12,6 +12,12 @@ class Project {
       return res.data;
     });
   }
+
+  menu(projectId) {
+    return request(`/projects_menu`).then((res) => {
+      return res.data;
+    });
+  }
 }
 
 export default new Project();

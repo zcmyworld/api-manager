@@ -68,6 +68,33 @@ class Project {
       }
     ]
   }
+
+  async menu(ctx) {
+    ctx.body = [
+      {
+        name: '项目模块',
+        childs: [
+          {
+            name: '项目列表',
+          },
+          {
+            name: '项目信息'
+          }
+        ]
+      },
+      {
+        name: '用户模块',
+        childs: [
+          {
+            name: '用户列表'
+          },
+          {
+            name: '用户信息'
+          }
+        ]
+      }
+    ]
+  }
 }
 
 module.exports = new Project();
