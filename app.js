@@ -18,6 +18,34 @@ app.use(cors());
 
 app.use(bodyParser());
 
+app.use(async function (ctx, next) {
+  let httpMethod = ctx.request.method;
+  let url = ctx.request.url;
+  let mockUrl = url.slice(url.indexOf('/mock') + '/mock'.length, url.length);
+  let config = {
+    header: [{
+      arg: 'token',
+      des: '获取成功的令牌',
+    }],
+    body: [
+      {
+        name: '项目１',
+        updated: '2017-3-2 13:12'
+      }, {
+        name: '项目２',
+        updated: '2017-3-2 13:12'
+      }
+    ]
+  }
+  ctx.set = {
+    'arg': 'hello'
+  }
+
+  ctx.body = config.body;
+
+  await next();
+});
+
 // let custom_config = {
 //   method: 'get',
 //   body: {
