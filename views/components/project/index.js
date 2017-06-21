@@ -131,7 +131,7 @@ export default class Index extends Reflux.Component {
                       {
                         item.childs.map((child_item, child_idx) => {
                           return (
-                            <Menu.Item key={idx.toString() + child_idx.toString()}>{child_item.name}</Menu.Item>
+                            <Menu.Item key={idx.toString() + child_idx.toString() }>{child_item.name}</Menu.Item>
                           );
                         })
                       }
@@ -140,16 +140,16 @@ export default class Index extends Reflux.Component {
                 })
 
               }
-
-
-
             </Menu>
           </Col>
           <Col span={21}>
             <div style={{ 'marginLeft': '30px' }}>
               <Row>
                 <Col style={{ 'float': 'left' }}><h1>{this.state.project.title}</h1></Col>
-                <Col style={{ 'float': 'right' }}><Button type="primary" size="large">Mock</Button></Col>
+                <Col style={{ 'float': 'left' }}>
+                  <Button type="primary">Edit</Button>
+                </Col>
+                <Col style={{ 'float': 'right' }}><Button type="primary" size="large">mock</Button></Col>
               </Row>
               <Row>
                 <div>{this.state.project.des}</div>

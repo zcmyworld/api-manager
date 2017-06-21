@@ -21,6 +21,7 @@
     "react-mixin": "^3.0.5",
     "react-router": "^2.0.0",
     "react-router-dom": "^4.1.1",
+    "react-transition-group": "^1.2.0",
     "reflux": "^6.4.1",
     "webpack": "^2.6.0",
     "whatwg-fetch": "^2.0.3"

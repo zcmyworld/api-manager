@@ -2,13 +2,18 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import { HashRouter, Route, Link } from 'react-router-dom';
 
+import { CSSTransitionGroup } from 'react-transition-group';
+
 import { Row, Col, Card, Layout, Menu, Breadcrumb, Icon, Table, Collapse } from 'antd';
 let { Header, Content, Footer } = Layout;
 
 const SubMenu = Menu.SubMenu;
 import ProjectList from './projectList/index.js';
 
+
 import Project from './project/index.js';
+
+
 
 const reqHeaderColumns = [
   {
@@ -103,10 +108,14 @@ ReactDom.render((
     </Header>
     <Content style={{ padding: '0 50px' }}>
       <HashRouter>
-        <div>
-          <Route exact path="/projects" component={ProjectList} hello="world"></Route>
-          <Route exact path="/projects/:projectId" component={Project}></Route>
-        </div>
+        <CSSTransitionGroup
+          transitionName="fade"
+          transitionEnterTimeout={300}
+          transitionLeaveTimeout={300}
+          >
+          <Route exact path="/projects" component={ProjectList} key={1}></Route>
+          <Route exact path="/projects/:projectId" component={Project} key={2}></Route>
+        </CSSTransitionGroup>
       </HashRouter>
     </Content>
     <Footer style={{ textAlign: 'center' }}>
