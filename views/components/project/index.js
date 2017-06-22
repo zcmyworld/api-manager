@@ -4,7 +4,7 @@ import ReactMixin from 'react-mixin';
 
 import { HashRouter, Route, Link } from 'react-router-dom';
 
-import { Row, Col, Card, Layout, Menu, Breadcrumb, Icon, Table, Collapse, Button } from 'antd';
+import { Row, Col, Card, Layout, Menu, Breadcrumb, Icon, Table, Collapse, Button, Input, Select, Checkbox} from 'antd';
 const { Header, Content, Footer } = Layout;
 
 const SubMenu = Menu.SubMenu;
@@ -36,26 +36,6 @@ const REQ_BODY_COLUMN = [
   }
 ];
 
-const REQ_HEADER_COLUMN = [
-  {
-    title: '参数',
-    dataIndex: 'arg',
-    key: 'arg'
-  }, {
-    title: '说明',
-    dataIndex: 'des',
-    key: 'des',
-  }, {
-    title: '可选',
-    dataIndex: 'optional',
-    key: 'optional'
-
-  }, {
-    title: '默认值',
-    dataIndex: 'defVal',
-    key: 'defVal',
-  }
-];
 
 
 const RES_HEADER_COLUMN = [
@@ -70,10 +50,8 @@ const RES_HEADER_COLUMN = [
   }
 ];
 
-
-
-
-
+var EDIT_MODE = true;
+// var EDIT_MODE = false;
 
 export default class Index extends Reflux.Component {
   constructor(props) {
@@ -87,18 +65,23 @@ export default class Index extends Reflux.Component {
     Action.menu(1);
   }
 
+  handleAdd() {
+    let reqHeadData = this.state.reqHeadData;
+    let newData = {
+      key: reqHeadData.length,
+      arg: '',
+      des: '',
+    };
+    this.setState({
+      reqHeadData: reqHeadData.concat([newData]),
+    });
+  }
+
   render() {
     if (!this.state.project || !this.state.menu) {
       return null;
     }
-    let reqHeadData = [];
-    this.state.project.reqHead.map((item, idx) => {
-      reqHeadData.push({
-        key: idx,
-        arg: item.arg,
-        des: item.des
-      })
-    })
+
     let reqBodyData = []
     this.state.project.reqBody.map((item, idx) => {
       reqBodyData.push({
@@ -110,6 +93,30 @@ export default class Index extends Reflux.Component {
         optional: item.optional
       })
     })
+
+    let REQ_HEADER_COLUMN = [
+      {
+        title: '参数',
+        dataIndex: 'arg',
+        key: 'arg'
+      }, {
+        title: '说明',
+        dataIndex: 'des',
+        key: 'des',
+      }, {
+        title: '可选',
+        dataIndex: 'optional',
+        key: 'optional',
+        render: text => <Checkbox />,
+
+
+      }, {
+        title: '默认值',
+        dataIndex: 'defVal',
+        key: 'defVal',
+        render: text => '-',
+      }
+    ];
 
     return (
       <div>
@@ -145,24 +152,76 @@ export default class Index extends Reflux.Component {
           <Col span={21}>
             <div style={{ 'marginLeft': '30px' }}>
               <Row>
-                <Col style={{ 'float': 'left' }}><h1>{this.state.project.title}</h1></Col>
+                <Col style={{ 'float': 'left' }}>
+                  {
+                    EDIT_MODE ?
+                      <div>
+                        <Input defaultValue={this.state.project.title}/>
+                      </div>
+                      :
+                      <h1>{this.state.project.title}</h1>
+                  }
+
+                </Col>
                 <Col style={{ 'float': 'right' }}><Button type="primary" size="large">mock</Button></Col>
               </Row>
               <Row>
-                <div>{this.state.project.des}</div>
+                {
+                  EDIT_MODE ?
+                    <div>
+                      <Input type='textarea' defaultValue={this.state.project.des}/>
+                    </div>
+                    :
+                    <div>
+                      {this.state.project.des}
+                    </div>
+                }
               </Row>
               <Row  className='api-title'>
-                <h2>调用地址: {this.state.project.route}</h2>
+                <h2>
+                  <span>调用地址: </span>
+                  {
+                    EDIT_MODE ?
+                      <div>
+                        <Input defaultValue={this.state.project.route}/>
+                      </div>
+                      :
+                      <span>
+                        {this.state.project.route}
+                      </span>
+                  }
+                </h2>
               </Row>
               <Row className='api-title'>
-                <h2>调用方式: {this.state.project.method}</h2>
+                <h2>
+                  <span>调用方式: </span>
+                  {
+                    EDIT_MODE ?
+                      <Select defaultValue={this.state.project.method} style={{ width: 120 }}>
+                        <Option value="GET">GET</Option>
+                        <Option value="POST">POST</Option>
+                        <Option value="PUT">PUT</Option>
+                        <Option value="DELETE">DELETE</Option>
+                        <Option value="PATCH">PATCH</Option>
+                      </Select>
+                      :
+                      <span>
+                        {this.state.project.method}
+                      </span>
+                  }
+                </h2>
               </Row>
               <Row className='api-title'>
                 <h2>Request Headers</h2>
               </Row>
               <Row>
+                {
+                  EDIT_MODE ?
+                    <Button className="editable-add-btn" onClick={this.handleAdd.bind(this)}>Add</Button>
+                    : ''
+                }
                 <Table
-                  dataSource={reqHeadData}
+                  dataSource={this.state.reqHeadData}
                   columns={REQ_HEADER_COLUMN}
                   bordered
                   size='small'

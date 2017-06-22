@@ -11,8 +11,17 @@ export default class Store extends Reflux.Store {
 
   onInfo(projectId) {
     Service.info(projectId).then((project) => {
+      let reqHeadData = [];
+      project.reqHead.map((item, idx) => {
+        reqHeadData.push({
+          key: idx,
+          arg: item.arg,
+          des: item.des
+        })
+      })
       this.setState({
-        project: project
+        project: project,
+        reqHeadData: reqHeadData
       })
     })
   }
