@@ -72494,15 +72494,6 @@ class Index extends __WEBPACK_IMPORTED_MODULE_8_reflux___default.a.Component {
               ),
               __WEBPACK_IMPORTED_MODULE_7_react___default.a.createElement(
                 __WEBPACK_IMPORTED_MODULE_3_antd_lib_col___default.a,
-                { style: { 'float': 'left' } },
-                __WEBPACK_IMPORTED_MODULE_7_react___default.a.createElement(
-                  __WEBPACK_IMPORTED_MODULE_2_antd_lib_button___default.a,
-                  { type: 'primary' },
-                  'Edit'
-                )
-              ),
-              __WEBPACK_IMPORTED_MODULE_7_react___default.a.createElement(
-                __WEBPACK_IMPORTED_MODULE_3_antd_lib_col___default.a,
                 { style: { 'float': 'right' } },
                 __WEBPACK_IMPORTED_MODULE_7_react___default.a.createElement(
                   __WEBPACK_IMPORTED_MODULE_2_antd_lib_button___default.a,
