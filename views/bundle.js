@@ -72316,21 +72316,23 @@ __WEBPACK_IMPORTED_MODULE_0__Select__["a" /* default */].OptGroup = __WEBPACK_IM
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_antd_lib_col___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_antd_lib_col__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_antd_lib_breadcrumb__ = __webpack_require__(254);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_antd_lib_breadcrumb___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_antd_lib_breadcrumb__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_antd_lib_checkbox__ = __webpack_require__(148);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_antd_lib_checkbox___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_antd_lib_checkbox__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_antd_lib_menu__ = __webpack_require__(151);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_antd_lib_menu___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_antd_lib_menu__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_antd_lib_layout__ = __webpack_require__(150);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_antd_lib_layout___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_antd_lib_layout__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_react__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_reflux__ = __webpack_require__(63);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_reflux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_reflux__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_react_mixin__ = __webpack_require__(274);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_react_mixin___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12_react_mixin__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_react_router_dom__ = __webpack_require__(170);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__action__ = __webpack_require__(282);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__store__ = __webpack_require__(662);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_antd_lib_popconfirm__ = __webpack_require__(672);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_antd_lib_popconfirm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_antd_lib_popconfirm__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_antd_lib_checkbox__ = __webpack_require__(148);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_antd_lib_checkbox___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_antd_lib_checkbox__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_antd_lib_menu__ = __webpack_require__(151);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_antd_lib_menu___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_antd_lib_menu__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_antd_lib_layout__ = __webpack_require__(150);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_antd_lib_layout___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_antd_lib_layout__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_reflux__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_reflux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12_reflux__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_react_mixin__ = __webpack_require__(274);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_react_mixin___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13_react_mixin__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_react_router_dom__ = __webpack_require__(170);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__action__ = __webpack_require__(282);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__store__ = __webpack_require__(662);
 
 
 
@@ -72347,9 +72349,10 @@ __WEBPACK_IMPORTED_MODULE_0__Select__["a" /* default */].OptGroup = __WEBPACK_IM
 
 
 
-const { Header, Content, Footer } = __WEBPACK_IMPORTED_MODULE_9_antd_lib_layout___default.a;
 
-const SubMenu = __WEBPACK_IMPORTED_MODULE_8_antd_lib_menu___default.a.SubMenu;
+const { Header, Content, Footer } = __WEBPACK_IMPORTED_MODULE_10_antd_lib_layout___default.a;
+
+const SubMenu = __WEBPACK_IMPORTED_MODULE_9_antd_lib_menu___default.a.SubMenu;
 
 
 
@@ -72389,18 +72392,26 @@ const RES_HEADER_COLUMN = [{
 var EDIT_MODE = true;
 // var EDIT_MODE = false;
 
-class Index extends __WEBPACK_IMPORTED_MODULE_11_reflux___default.a.Component {
+class Index extends __WEBPACK_IMPORTED_MODULE_12_reflux___default.a.Component {
   constructor(props) {
     super(props);
-    this.stores = [__WEBPACK_IMPORTED_MODULE_15__store__["a" /* default */]];
+    this.stores = [__WEBPACK_IMPORTED_MODULE_16__store__["a" /* default */]];
   }
 
   componentDidMount() {
-    __WEBPACK_IMPORTED_MODULE_14__action__["a" /* default */].info(1);
-    __WEBPACK_IMPORTED_MODULE_14__action__["a" /* default */].menu(1);
+    __WEBPACK_IMPORTED_MODULE_15__action__["a" /* default */].info(1);
+    __WEBPACK_IMPORTED_MODULE_15__action__["a" /* default */].menu(1);
+  }
+  handleReqHeadTablDrop(index) {
+    console.log(index);
+    let reqHeadData = this.state.reqHeadData;
+    reqHeadData.splice(index, 1);
+    this.setState({
+      reqHeadData: reqHeadData
+    });
   }
 
-  handleAdd() {
+  handleReqHeadTablAdd() {
     let reqHeadData = this.state.reqHeadData;
     let newData = {
       key: reqHeadData.length,
@@ -72441,29 +72452,43 @@ class Index extends __WEBPACK_IMPORTED_MODULE_11_reflux___default.a.Component {
       title: '可选',
       dataIndex: 'optional',
       key: 'optional',
-      render: text => __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7_antd_lib_checkbox___default.a, null)
-
+      render: text => __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8_antd_lib_checkbox___default.a, null)
     }, {
       title: '默认值',
       dataIndex: 'defVal',
       key: 'defVal',
       render: text => '-'
+    }, {
+      title: 'operation',
+      dataIndex: 'operation',
+      key: 'operation',
+      render: (text, record, index) => {
+        return __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_7_antd_lib_popconfirm___default.a,
+          { title: 'Sure to delete?', onConfirm: () => this.handleReqHeadTablDrop(index) },
+          __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
+            'a',
+            { href: '#' },
+            'Delete'
+          )
+        );
+      }
     }];
 
-    return __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+    return __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
       'div',
       null,
-      __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6_antd_lib_breadcrumb___default.a, {
+      __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6_antd_lib_breadcrumb___default.a, {
         style: { margin: '12px 24px' },
         routes: [{ breadcrumbName: 'Home', name: 'home', path: '/projects' }, { breadcrumbName: '项目名称', path: '/123' }] }),
-      __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+      __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
         __WEBPACK_IMPORTED_MODULE_2_antd_lib_row___default.a,
         { style: { background: '#fff', padding: 24, minHeight: 1080, paddingBottom: 100 } },
-        __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+        __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
           __WEBPACK_IMPORTED_MODULE_5_antd_lib_col___default.a,
           { span: 3 },
-          __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
-            __WEBPACK_IMPORTED_MODULE_8_antd_lib_menu___default.a,
+          __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_9_antd_lib_menu___default.a,
             {
               theme: 'Light',
               defaultOpenKeys: ['sub1'],
@@ -72471,20 +72496,20 @@ class Index extends __WEBPACK_IMPORTED_MODULE_11_reflux___default.a.Component {
               style: { 'marginLeft': '-24px' }
             },
             this.state.menu.map((item, idx) => {
-              return __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+              return __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                 SubMenu,
-                { key: idx, title: __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+                { key: idx, title: __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                     'span',
                     null,
-                    __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+                    __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                       'span',
                       null,
                       item.name
                     )
                   ) },
                 item.childs.map((child_item, child_idx) => {
-                  return __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
-                    __WEBPACK_IMPORTED_MODULE_8_antd_lib_menu___default.a.Item,
+                  return __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
+                    __WEBPACK_IMPORTED_MODULE_9_antd_lib_menu___default.a.Item,
                     { key: idx.toString() + child_idx.toString() },
                     child_item.name
                   );
@@ -72493,137 +72518,141 @@ class Index extends __WEBPACK_IMPORTED_MODULE_11_reflux___default.a.Component {
             })
           )
         ),
-        __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+        __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
           __WEBPACK_IMPORTED_MODULE_5_antd_lib_col___default.a,
           { span: 21 },
-          __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
             'div',
             { style: { 'marginLeft': '30px' } },
-            __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_2_antd_lib_row___default.a,
               null,
-              __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                 __WEBPACK_IMPORTED_MODULE_5_antd_lib_col___default.a,
                 { style: { 'float': 'left' } },
-                EDIT_MODE ? __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+                EDIT_MODE ? __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                   'div',
                   null,
-                  __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_antd_lib_input___default.a, { defaultValue: this.state.project.title })
-                ) : __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_antd_lib_input___default.a, { defaultValue: this.state.project.title })
+                ) : __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                   'h1',
                   null,
                   this.state.project.title
                 )
               ),
-              __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                 __WEBPACK_IMPORTED_MODULE_5_antd_lib_col___default.a,
                 { style: { 'float': 'right' } },
-                __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                   __WEBPACK_IMPORTED_MODULE_3_antd_lib_button___default.a,
                   { type: 'primary', size: 'large' },
                   'mock'
                 )
               )
             ),
-            __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_2_antd_lib_row___default.a,
               null,
-              EDIT_MODE ? __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+              EDIT_MODE ? __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                 'div',
                 null,
-                __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_antd_lib_input___default.a, { type: 'textarea', defaultValue: this.state.project.des })
-              ) : __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_antd_lib_input___default.a, { type: 'textarea', defaultValue: this.state.project.des })
+              ) : __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                 'div',
                 null,
                 this.state.project.des
               )
             ),
-            __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_2_antd_lib_row___default.a,
               { className: 'api-title' },
-              __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                 'h2',
                 null,
-                __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                   'span',
                   null,
                   '\u8C03\u7528\u5730\u5740: '
                 ),
-                EDIT_MODE ? __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+                EDIT_MODE ? __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                   'div',
                   null,
-                  __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_antd_lib_input___default.a, { defaultValue: this.state.project.route })
-                ) : __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_antd_lib_input___default.a, { defaultValue: this.state.project.route })
+                ) : __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                   'span',
                   null,
                   this.state.project.route
                 )
               )
             ),
-            __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_2_antd_lib_row___default.a,
               { className: 'api-title' },
-              __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                 'h2',
                 null,
-                __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                   'span',
                   null,
                   '\u8C03\u7528\u65B9\u5F0F: '
                 ),
-                EDIT_MODE ? __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+                EDIT_MODE ? __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                   __WEBPACK_IMPORTED_MODULE_1_antd_lib_select___default.a,
                   { defaultValue: this.state.project.method, style: { width: 120 } },
-                  __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                     Option,
                     { value: 'GET' },
                     'GET'
                   ),
-                  __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                     Option,
                     { value: 'POST' },
                     'POST'
                   ),
-                  __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                     Option,
                     { value: 'PUT' },
                     'PUT'
                   ),
-                  __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                     Option,
                     { value: 'DELETE' },
                     'DELETE'
                   ),
-                  __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                     Option,
                     { value: 'PATCH' },
                     'PATCH'
                   )
-                ) : __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+                ) : __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                   'span',
                   null,
                   this.state.project.method
                 )
               )
             ),
-            __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_2_antd_lib_row___default.a,
               { className: 'api-title' },
-              __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                 'h2',
                 null,
                 'Request Headers'
               )
             ),
-            __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_2_antd_lib_row___default.a,
               null,
-              EDIT_MODE ? __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
-                __WEBPACK_IMPORTED_MODULE_3_antd_lib_button___default.a,
-                { className: 'editable-add-btn', onClick: this.handleAdd.bind(this) },
-                'Add'
+              EDIT_MODE ? __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
+                'div',
+                null,
+                __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_3_antd_lib_button___default.a,
+                  { className: 'editable-add-btn', onClick: this.handleReqHeadTablAdd.bind(this) },
+                  'Add'
+                )
               ) : '',
-              __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0_antd_lib_table___default.a, {
+              __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0_antd_lib_table___default.a, {
                 dataSource: this.state.reqHeadData,
                 columns: REQ_HEADER_COLUMN,
                 bordered: true,
@@ -72631,19 +72660,19 @@ class Index extends __WEBPACK_IMPORTED_MODULE_11_reflux___default.a.Component {
                 pagination: false
               })
             ),
-            __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_2_antd_lib_row___default.a,
               { className: 'api-title' },
-              __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                 'h2',
                 null,
                 'Request Body'
               )
             ),
-            __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_2_antd_lib_row___default.a,
               null,
-              __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0_antd_lib_table___default.a, {
+              __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0_antd_lib_table___default.a, {
                 dataSource: reqBodyData,
                 columns: REQ_BODY_COLUMN,
                 bordered: true,
@@ -72651,10 +72680,10 @@ class Index extends __WEBPACK_IMPORTED_MODULE_11_reflux___default.a.Component {
                 pagination: false
               })
             ),
-            __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_2_antd_lib_row___default.a,
               { className: 'api-title' },
-              __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                 'h2',
                 null,
                 'Response'
@@ -72670,31 +72699,31 @@ class Index extends __WEBPACK_IMPORTED_MODULE_11_reflux___default.a.Component {
                 });
               });
 
-              return __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+              return __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                 'div',
                 { key: idx },
-                __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                   __WEBPACK_IMPORTED_MODULE_2_antd_lib_row___default.a,
                   { className: 'api-title' },
-                  __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                     'h2',
                     null,
                     item.type
                   )
                 ),
-                __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                   __WEBPACK_IMPORTED_MODULE_2_antd_lib_row___default.a,
                   { className: 'api-title' },
-                  __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                     'h2',
                     null,
                     'Response Header'
                   )
                 ),
-                __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                   __WEBPACK_IMPORTED_MODULE_2_antd_lib_row___default.a,
                   null,
-                  __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0_antd_lib_table___default.a, {
+                  __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0_antd_lib_table___default.a, {
                     dataSource: resHeadData,
                     columns: RES_HEADER_COLUMN,
                     bordered: true,
@@ -72702,19 +72731,19 @@ class Index extends __WEBPACK_IMPORTED_MODULE_11_reflux___default.a.Component {
                     pagination: false
                   })
                 ),
-                __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                   __WEBPACK_IMPORTED_MODULE_2_antd_lib_row___default.a,
                   { className: 'api-title' },
-                  __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                     'h2',
                     null,
                     'Response Body'
                   )
                 ),
-                __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                   __WEBPACK_IMPORTED_MODULE_2_antd_lib_row___default.a,
                   null,
-                  __WEBPACK_IMPORTED_MODULE_10_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_11_react___default.a.createElement(
                     'pre',
                     null,
                     JSON.stringify(item.body, null, 2)
@@ -73497,6 +73526,867 @@ _Input2["default"].Group = _Group2["default"];
 _Input2["default"].Search = _Search2["default"];
 exports["default"] = _Input2["default"];
 module.exports = exports['default'];
+
+/***/ }),
+/* 672 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _extends2 = __webpack_require__(7);
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _classCallCheck2 = __webpack_require__(6);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _possibleConstructorReturn2 = __webpack_require__(9);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(8);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _tooltip = __webpack_require__(673);
+
+var _tooltip2 = _interopRequireDefault(_tooltip);
+
+var _icon = __webpack_require__(60);
+
+var _icon2 = _interopRequireDefault(_icon);
+
+var _button = __webpack_require__(255);
+
+var _button2 = _interopRequireDefault(_button);
+
+var _injectLocale = __webpack_require__(522);
+
+var _injectLocale2 = _interopRequireDefault(_injectLocale);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var __rest = undefined && undefined.__rest || function (s, e) {
+    var t = {};
+    for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+    }if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+        if (e.indexOf(p[i]) < 0) t[p[i]] = s[p[i]];
+    }return t;
+};
+
+var Popconfirm = function (_React$Component) {
+    (0, _inherits3["default"])(Popconfirm, _React$Component);
+
+    function Popconfirm(props) {
+        (0, _classCallCheck3["default"])(this, Popconfirm);
+
+        var _this = (0, _possibleConstructorReturn3["default"])(this, _React$Component.call(this, props));
+
+        _this.onConfirm = function (e) {
+            _this.setVisible(false);
+            var onConfirm = _this.props.onConfirm;
+
+            if (onConfirm) {
+                onConfirm.call(_this, e);
+            }
+        };
+        _this.onCancel = function (e) {
+            _this.setVisible(false);
+            var onCancel = _this.props.onCancel;
+
+            if (onCancel) {
+                onCancel.call(_this, e);
+            }
+        };
+        _this.onVisibleChange = function (visible) {
+            _this.setVisible(visible);
+        };
+        _this.state = {
+            visible: props.visible
+        };
+        return _this;
+    }
+
+    Popconfirm.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+        if ('visible' in nextProps) {
+            this.setState({ visible: nextProps.visible });
+        }
+    };
+
+    Popconfirm.prototype.setVisible = function setVisible(visible) {
+        var props = this.props;
+        if (!('visible' in props)) {
+            this.setState({ visible: visible });
+        }
+        var onVisibleChange = props.onVisibleChange;
+
+        if (onVisibleChange) {
+            onVisibleChange(visible);
+        }
+    };
+
+    Popconfirm.prototype.render = function render() {
+        var _a = this.props,
+            prefixCls = _a.prefixCls,
+            title = _a.title,
+            placement = _a.placement,
+            okText = _a.okText,
+            cancelText = _a.cancelText,
+            restProps = __rest(_a, ["prefixCls", "title", "placement", "okText", "cancelText"]);
+        var popconfirmLocale = this.getLocale();
+        var overlay = _react2["default"].createElement(
+            'div',
+            null,
+            _react2["default"].createElement(
+                'div',
+                { className: prefixCls + '-inner-content' },
+                _react2["default"].createElement(
+                    'div',
+                    { className: prefixCls + '-message' },
+                    _react2["default"].createElement(_icon2["default"], { type: 'exclamation-circle' }),
+                    _react2["default"].createElement(
+                        'div',
+                        { className: prefixCls + '-message-title' },
+                        title
+                    )
+                ),
+                _react2["default"].createElement(
+                    'div',
+                    { className: prefixCls + '-buttons' },
+                    _react2["default"].createElement(
+                        _button2["default"],
+                        { onClick: this.onCancel, size: 'small' },
+                        cancelText || popconfirmLocale.cancelText
+                    ),
+                    _react2["default"].createElement(
+                        _button2["default"],
+                        { onClick: this.onConfirm, type: 'primary', size: 'small' },
+                        okText || popconfirmLocale.okText
+                    )
+                )
+            )
+        );
+        return _react2["default"].createElement(_tooltip2["default"], (0, _extends3["default"])({}, restProps, { prefixCls: prefixCls, placement: placement, onVisibleChange: this.onVisibleChange, visible: this.state.visible, overlay: overlay }));
+    };
+
+    return Popconfirm;
+}(_react2["default"].Component);
+
+Popconfirm.defaultProps = {
+    prefixCls: 'ant-popover',
+    transitionName: 'zoom-big',
+    placement: 'top',
+    trigger: 'click'
+};
+var injectPopconfirmLocale = (0, _injectLocale2["default"])('Popconfirm', {
+    cancelText: '取消',
+    okText: '确定'
+});
+exports["default"] = injectPopconfirmLocale(Popconfirm);
+module.exports = exports['default'];
+
+/***/ }),
+/* 673 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports["default"] = undefined;
+
+var _defineProperty2 = __webpack_require__(15);
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+var _classCallCheck2 = __webpack_require__(6);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _possibleConstructorReturn2 = __webpack_require__(9);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(8);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _extends2 = __webpack_require__(7);
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _rcTooltip = __webpack_require__(676);
+
+var _rcTooltip2 = _interopRequireDefault(_rcTooltip);
+
+var _classnames = __webpack_require__(13);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _placements = __webpack_require__(674);
+
+var _placements2 = _interopRequireDefault(_placements);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var splitObject = function splitObject(obj, keys) {
+    var picked = {};
+    var omited = (0, _extends3["default"])({}, obj);
+    keys.forEach(function (key) {
+        if (obj && key in obj) {
+            picked[key] = obj[key];
+            delete omited[key];
+        }
+    });
+    return { picked: picked, omited: omited };
+};
+
+var Tooltip = function (_React$Component) {
+    (0, _inherits3["default"])(Tooltip, _React$Component);
+
+    function Tooltip(props) {
+        (0, _classCallCheck3["default"])(this, Tooltip);
+
+        var _this = (0, _possibleConstructorReturn3["default"])(this, _React$Component.call(this, props));
+
+        _this.onVisibleChange = function (visible) {
+            var onVisibleChange = _this.props.onVisibleChange;
+
+            if (!('visible' in _this.props)) {
+                _this.setState({ visible: _this.isNoTitle() ? false : visible });
+            }
+            if (onVisibleChange && !_this.isNoTitle()) {
+                onVisibleChange(visible);
+            }
+        };
+        // 动态设置动画点
+        _this.onPopupAlign = function (domNode, align) {
+            var placements = _this.getPlacements();
+            // 当前返回的位置
+            var placement = Object.keys(placements).filter(function (key) {
+                return placements[key].points[0] === align.points[0] && placements[key].points[1] === align.points[1];
+            })[0];
+            if (!placement) {
+                return;
+            }
+            // 根据当前坐标设置动画点
+            var rect = domNode.getBoundingClientRect();
+            var transformOrigin = {
+                top: '50%',
+                left: '50%'
+            };
+            if (placement.indexOf('top') >= 0 || placement.indexOf('Bottom') >= 0) {
+                transformOrigin.top = rect.height - align.offset[1] + 'px';
+            } else if (placement.indexOf('Top') >= 0 || placement.indexOf('bottom') >= 0) {
+                transformOrigin.top = -align.offset[1] + 'px';
+            }
+            if (placement.indexOf('left') >= 0 || placement.indexOf('Right') >= 0) {
+                transformOrigin.left = rect.width - align.offset[0] + 'px';
+            } else if (placement.indexOf('right') >= 0 || placement.indexOf('Left') >= 0) {
+                transformOrigin.left = -align.offset[0] + 'px';
+            }
+            domNode.style.transformOrigin = transformOrigin.left + ' ' + transformOrigin.top;
+        };
+        _this.state = {
+            visible: !!props.visible
+        };
+        return _this;
+    }
+
+    Tooltip.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+        if ('visible' in nextProps) {
+            this.setState({ visible: nextProps.visible });
+        }
+    };
+
+    Tooltip.prototype.getPopupDomNode = function getPopupDomNode() {
+        return this.refs.tooltip.getPopupDomNode();
+    };
+
+    Tooltip.prototype.getPlacements = function getPlacements() {
+        var _props = this.props,
+            builtinPlacements = _props.builtinPlacements,
+            arrowPointAtCenter = _props.arrowPointAtCenter;
+
+        return builtinPlacements || (0, _placements2["default"])({
+            arrowPointAtCenter: arrowPointAtCenter,
+            verticalArrowShift: 8
+        });
+    };
+
+    Tooltip.prototype.isHoverTrigger = function isHoverTrigger() {
+        var trigger = this.props.trigger;
+
+        if (!trigger || trigger === 'hover') {
+            return true;
+        }
+        if (Array.isArray(trigger)) {
+            return trigger.indexOf('hover') >= 0;
+        }
+        return false;
+    };
+    // Fix Tooltip won't hide at disabled button
+    // mouse events don't trigger at disabled button in Chrome
+    // https://github.com/react-component/tooltip/issues/18
+
+
+    Tooltip.prototype.getDisabledCompatibleChildren = function getDisabledCompatibleChildren(element) {
+        if ((element.type.__ANT_BUTTON || element.type === 'button') && element.props.disabled && this.isHoverTrigger()) {
+            // Pick some layout related style properties up to span
+            // Prevent layout bugs like https://github.com/ant-design/ant-design/issues/5254
+            var _splitObject = splitObject(element.props.style, ['position', 'left', 'right', 'top', 'bottom', 'float', 'display', 'zIndex']),
+                picked = _splitObject.picked,
+                omited = _splitObject.omited;
+
+            var spanStyle = (0, _extends3["default"])({ display: 'inline-block' }, picked, { cursor: 'not-allowed' });
+            var buttonStyle = (0, _extends3["default"])({}, omited, { pointerEvents: 'none' });
+            var child = (0, _react.cloneElement)(element, {
+                style: buttonStyle,
+                className: null
+            });
+            return _react2["default"].createElement(
+                'span',
+                { style: spanStyle, className: element.props.className },
+                child
+            );
+        }
+        return element;
+    };
+
+    Tooltip.prototype.isNoTitle = function isNoTitle() {
+        var _props2 = this.props,
+            title = _props2.title,
+            overlay = _props2.overlay;
+
+        return !title && !overlay; // overlay for old version compatibility
+    };
+
+    Tooltip.prototype.render = function render() {
+        var props = this.props,
+            state = this.state;
+        var prefixCls = props.prefixCls,
+            title = props.title,
+            overlay = props.overlay,
+            openClassName = props.openClassName,
+            getPopupContainer = props.getPopupContainer,
+            getTooltipContainer = props.getTooltipContainer;
+
+        var children = props.children;
+        var visible = state.visible;
+        // Hide tooltip when there is no title
+        if (!('visible' in props) && this.isNoTitle()) {
+            visible = false;
+        }
+        var child = this.getDisabledCompatibleChildren(_react2["default"].isValidElement(children) ? children : _react2["default"].createElement(
+            'span',
+            null,
+            children
+        ));
+        var childProps = child.props;
+        var childCls = (0, _classnames2["default"])(childProps.className, (0, _defineProperty3["default"])({}, openClassName || prefixCls + '-open', true));
+        return _react2["default"].createElement(
+            _rcTooltip2["default"],
+            (0, _extends3["default"])({}, this.props, { getTooltipContainer: getPopupContainer || getTooltipContainer, ref: 'tooltip', builtinPlacements: this.getPlacements(), overlay: overlay || title, visible: visible, onVisibleChange: this.onVisibleChange, onPopupAlign: this.onPopupAlign }),
+            visible ? (0, _react.cloneElement)(child, { className: childCls }) : child
+        );
+    };
+
+    return Tooltip;
+}(_react2["default"].Component);
+
+exports["default"] = Tooltip;
+
+Tooltip.defaultProps = {
+    prefixCls: 'ant-tooltip',
+    placement: 'top',
+    transitionName: 'zoom-big-fast',
+    mouseEnterDelay: 0.1,
+    mouseLeaveDelay: 0.1,
+    arrowPointAtCenter: false
+};
+module.exports = exports['default'];
+
+/***/ }),
+/* 674 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports["default"] = getPlacements;
+
+var _placements = __webpack_require__(678);
+
+var autoAdjustOverflow = {
+    adjustX: 1,
+    adjustY: 1
+};
+var targetOffset = [0, 0];
+function getPlacements() {
+    var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    if (!config.arrowPointAtCenter) {
+        return _placements.placements;
+    }
+    var _config$arrowWidth = config.arrowWidth,
+        arrowWidth = _config$arrowWidth === undefined ? 5 : _config$arrowWidth,
+        _config$horizontalArr = config.horizontalArrowShift,
+        horizontalArrowShift = _config$horizontalArr === undefined ? 16 : _config$horizontalArr,
+        _config$verticalArrow = config.verticalArrowShift,
+        verticalArrowShift = _config$verticalArrow === undefined ? 12 : _config$verticalArrow;
+
+    return {
+        left: {
+            points: ['cr', 'cl'],
+            overflow: autoAdjustOverflow,
+            offset: [-4, 0],
+            targetOffset: targetOffset
+        },
+        right: {
+            points: ['cl', 'cr'],
+            overflow: autoAdjustOverflow,
+            offset: [4, 0],
+            targetOffset: targetOffset
+        },
+        top: {
+            points: ['bc', 'tc'],
+            overflow: autoAdjustOverflow,
+            offset: [0, -4],
+            targetOffset: targetOffset
+        },
+        bottom: {
+            points: ['tc', 'bc'],
+            overflow: autoAdjustOverflow,
+            offset: [0, 4],
+            targetOffset: targetOffset
+        },
+        topLeft: {
+            points: ['bl', 'tc'],
+            overflow: autoAdjustOverflow,
+            offset: [-(horizontalArrowShift + arrowWidth), -4],
+            targetOffset: targetOffset
+        },
+        leftTop: {
+            points: ['tr', 'cl'],
+            overflow: autoAdjustOverflow,
+            offset: [-4, -(verticalArrowShift + arrowWidth)],
+            targetOffset: targetOffset
+        },
+        topRight: {
+            points: ['br', 'tc'],
+            overflow: autoAdjustOverflow,
+            offset: [horizontalArrowShift + arrowWidth, -4],
+            targetOffset: targetOffset
+        },
+        rightTop: {
+            points: ['tl', 'cr'],
+            overflow: autoAdjustOverflow,
+            offset: [4, -(verticalArrowShift + arrowWidth)],
+            targetOffset: targetOffset
+        },
+        bottomRight: {
+            points: ['tr', 'bc'],
+            overflow: autoAdjustOverflow,
+            offset: [horizontalArrowShift + arrowWidth, 4],
+            targetOffset: targetOffset
+        },
+        rightBottom: {
+            points: ['bl', 'cr'],
+            overflow: autoAdjustOverflow,
+            offset: [4, verticalArrowShift + arrowWidth],
+            targetOffset: targetOffset
+        },
+        bottomLeft: {
+            points: ['tl', 'bc'],
+            overflow: autoAdjustOverflow,
+            offset: [-(horizontalArrowShift + arrowWidth), 4],
+            targetOffset: targetOffset
+        },
+        leftBottom: {
+            points: ['br', 'cl'],
+            overflow: autoAdjustOverflow,
+            offset: [-4, verticalArrowShift + arrowWidth],
+            targetOffset: targetOffset
+        }
+    };
+}
+module.exports = exports['default'];
+
+/***/ }),
+/* 675 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_objectWithoutProperties__ = __webpack_require__(176);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_objectWithoutProperties___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_objectWithoutProperties__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_classCallCheck__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_classCallCheck__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_createClass__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_createClass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_createClass__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_possibleConstructorReturn__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_babel_runtime_helpers_inherits__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_babel_runtime_helpers_inherits__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_prop_types__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_prop_types__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_trigger__ = __webpack_require__(192);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_trigger___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_rc_trigger__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__placements__ = __webpack_require__(677);
+
+
+
+
+
+
+
+
+
+
+
+var Tooltip = function (_Component) {
+  __WEBPACK_IMPORTED_MODULE_5_babel_runtime_helpers_inherits___default()(Tooltip, _Component);
+
+  function Tooltip() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_classCallCheck___default()(this, Tooltip);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_possibleConstructorReturn___default()(this, (_ref = Tooltip.__proto__ || Object.getPrototypeOf(Tooltip)).call.apply(_ref, [this].concat(args))), _this), _this.getPopupElement = function () {
+      var _this$props = _this.props,
+          arrowContent = _this$props.arrowContent,
+          overlay = _this$props.overlay,
+          prefixCls = _this$props.prefixCls;
+
+      return [__WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
+        'div',
+        { className: prefixCls + '-arrow', key: 'arrow' },
+        arrowContent
+      ), __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
+        'div',
+        { className: prefixCls + '-inner', key: 'content' },
+        typeof overlay === 'function' ? overlay() : overlay
+      )];
+    }, _temp), __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_possibleConstructorReturn___default()(_this, _ret);
+  }
+
+  __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_createClass___default()(Tooltip, [{
+    key: 'getPopupDomNode',
+    value: function getPopupDomNode() {
+      return this.refs.trigger.getPopupDomNode();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          overlayClassName = _props.overlayClassName,
+          trigger = _props.trigger,
+          mouseEnterDelay = _props.mouseEnterDelay,
+          mouseLeaveDelay = _props.mouseLeaveDelay,
+          overlayStyle = _props.overlayStyle,
+          prefixCls = _props.prefixCls,
+          children = _props.children,
+          onVisibleChange = _props.onVisibleChange,
+          transitionName = _props.transitionName,
+          animation = _props.animation,
+          placement = _props.placement,
+          align = _props.align,
+          destroyTooltipOnHide = _props.destroyTooltipOnHide,
+          defaultVisible = _props.defaultVisible,
+          getTooltipContainer = _props.getTooltipContainer,
+          restProps = __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_objectWithoutProperties___default()(_props, ['overlayClassName', 'trigger', 'mouseEnterDelay', 'mouseLeaveDelay', 'overlayStyle', 'prefixCls', 'children', 'onVisibleChange', 'transitionName', 'animation', 'placement', 'align', 'destroyTooltipOnHide', 'defaultVisible', 'getTooltipContainer']);
+
+      var extraProps = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, restProps);
+      if ('visible' in this.props) {
+        extraProps.popupVisible = this.props.visible;
+      }
+      return __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
+        __WEBPACK_IMPORTED_MODULE_8_rc_trigger___default.a,
+        __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({
+          popupClassName: overlayClassName,
+          ref: 'trigger',
+          prefixCls: prefixCls,
+          popup: this.getPopupElement,
+          action: trigger,
+          builtinPlacements: __WEBPACK_IMPORTED_MODULE_9__placements__["a" /* placements */],
+          popupPlacement: placement,
+          popupAlign: align,
+          getPopupContainer: getTooltipContainer,
+          onPopupVisibleChange: onVisibleChange,
+          popupTransitionName: transitionName,
+          popupAnimation: animation,
+          defaultPopupVisible: defaultVisible,
+          destroyPopupOnHide: destroyTooltipOnHide,
+          mouseLeaveDelay: mouseLeaveDelay,
+          popupStyle: overlayStyle,
+          mouseEnterDelay: mouseEnterDelay
+        }, extraProps),
+        children
+      );
+    }
+  }]);
+
+  return Tooltip;
+}(__WEBPACK_IMPORTED_MODULE_6_react__["Component"]);
+
+Tooltip.propTypes = {
+  trigger: __WEBPACK_IMPORTED_MODULE_7_prop_types___default.a.any,
+  children: __WEBPACK_IMPORTED_MODULE_7_prop_types___default.a.any,
+  defaultVisible: __WEBPACK_IMPORTED_MODULE_7_prop_types___default.a.bool,
+  visible: __WEBPACK_IMPORTED_MODULE_7_prop_types___default.a.bool,
+  placement: __WEBPACK_IMPORTED_MODULE_7_prop_types___default.a.string,
+  transitionName: __WEBPACK_IMPORTED_MODULE_7_prop_types___default.a.string,
+  animation: __WEBPACK_IMPORTED_MODULE_7_prop_types___default.a.any,
+  onVisibleChange: __WEBPACK_IMPORTED_MODULE_7_prop_types___default.a.func,
+  afterVisibleChange: __WEBPACK_IMPORTED_MODULE_7_prop_types___default.a.func,
+  overlay: __WEBPACK_IMPORTED_MODULE_7_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_7_prop_types___default.a.node, __WEBPACK_IMPORTED_MODULE_7_prop_types___default.a.func]).isRequired,
+  overlayStyle: __WEBPACK_IMPORTED_MODULE_7_prop_types___default.a.object,
+  overlayClassName: __WEBPACK_IMPORTED_MODULE_7_prop_types___default.a.string,
+  prefixCls: __WEBPACK_IMPORTED_MODULE_7_prop_types___default.a.string,
+  mouseEnterDelay: __WEBPACK_IMPORTED_MODULE_7_prop_types___default.a.number,
+  mouseLeaveDelay: __WEBPACK_IMPORTED_MODULE_7_prop_types___default.a.number,
+  getTooltipContainer: __WEBPACK_IMPORTED_MODULE_7_prop_types___default.a.func,
+  destroyTooltipOnHide: __WEBPACK_IMPORTED_MODULE_7_prop_types___default.a.bool,
+  align: __WEBPACK_IMPORTED_MODULE_7_prop_types___default.a.object,
+  arrowContent: __WEBPACK_IMPORTED_MODULE_7_prop_types___default.a.any
+};
+Tooltip.defaultProps = {
+  prefixCls: 'rc-tooltip',
+  mouseEnterDelay: 0,
+  destroyTooltipOnHide: false,
+  mouseLeaveDelay: 0.1,
+  align: {},
+  placement: 'right',
+  trigger: ['hover'],
+  arrowContent: null
+};
+
+
+/* harmony default export */ __webpack_exports__["a"] = (Tooltip);
+
+/***/ }),
+/* 676 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Tooltip__ = __webpack_require__(675);
+
+
+/* harmony default export */ __webpack_exports__["default"] = (__WEBPACK_IMPORTED_MODULE_0__Tooltip__["a" /* default */]);
+
+/***/ }),
+/* 677 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return placements; });
+var autoAdjustOverflow = {
+  adjustX: 1,
+  adjustY: 1
+};
+
+var targetOffset = [0, 0];
+
+var placements = {
+  left: {
+    points: ['cr', 'cl'],
+    overflow: autoAdjustOverflow,
+    offset: [-4, 0],
+    targetOffset: targetOffset
+  },
+  right: {
+    points: ['cl', 'cr'],
+    overflow: autoAdjustOverflow,
+    offset: [4, 0],
+    targetOffset: targetOffset
+  },
+  top: {
+    points: ['bc', 'tc'],
+    overflow: autoAdjustOverflow,
+    offset: [0, -4],
+    targetOffset: targetOffset
+  },
+  bottom: {
+    points: ['tc', 'bc'],
+    overflow: autoAdjustOverflow,
+    offset: [0, 4],
+    targetOffset: targetOffset
+  },
+  topLeft: {
+    points: ['bl', 'tl'],
+    overflow: autoAdjustOverflow,
+    offset: [0, -4],
+    targetOffset: targetOffset
+  },
+  leftTop: {
+    points: ['tr', 'tl'],
+    overflow: autoAdjustOverflow,
+    offset: [-4, 0],
+    targetOffset: targetOffset
+  },
+  topRight: {
+    points: ['br', 'tr'],
+    overflow: autoAdjustOverflow,
+    offset: [0, -4],
+    targetOffset: targetOffset
+  },
+  rightTop: {
+    points: ['tl', 'tr'],
+    overflow: autoAdjustOverflow,
+    offset: [4, 0],
+    targetOffset: targetOffset
+  },
+  bottomRight: {
+    points: ['tr', 'br'],
+    overflow: autoAdjustOverflow,
+    offset: [0, 4],
+    targetOffset: targetOffset
+  },
+  rightBottom: {
+    points: ['bl', 'br'],
+    overflow: autoAdjustOverflow,
+    offset: [4, 0],
+    targetOffset: targetOffset
+  },
+  bottomLeft: {
+    points: ['tl', 'bl'],
+    overflow: autoAdjustOverflow,
+    offset: [0, 4],
+    targetOffset: targetOffset
+  },
+  leftBottom: {
+    points: ['br', 'bl'],
+    overflow: autoAdjustOverflow,
+    offset: [-4, 0],
+    targetOffset: targetOffset
+  }
+};
+
+/* unused harmony default export */ var _unused_webpack_default_export = (placements);
+
+/***/ }),
+/* 678 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var autoAdjustOverflow = {
+  adjustX: 1,
+  adjustY: 1
+};
+
+var targetOffset = [0, 0];
+
+var placements = exports.placements = {
+  left: {
+    points: ['cr', 'cl'],
+    overflow: autoAdjustOverflow,
+    offset: [-4, 0],
+    targetOffset: targetOffset
+  },
+  right: {
+    points: ['cl', 'cr'],
+    overflow: autoAdjustOverflow,
+    offset: [4, 0],
+    targetOffset: targetOffset
+  },
+  top: {
+    points: ['bc', 'tc'],
+    overflow: autoAdjustOverflow,
+    offset: [0, -4],
+    targetOffset: targetOffset
+  },
+  bottom: {
+    points: ['tc', 'bc'],
+    overflow: autoAdjustOverflow,
+    offset: [0, 4],
+    targetOffset: targetOffset
+  },
+  topLeft: {
+    points: ['bl', 'tl'],
+    overflow: autoAdjustOverflow,
+    offset: [0, -4],
+    targetOffset: targetOffset
+  },
+  leftTop: {
+    points: ['tr', 'tl'],
+    overflow: autoAdjustOverflow,
+    offset: [-4, 0],
+    targetOffset: targetOffset
+  },
+  topRight: {
+    points: ['br', 'tr'],
+    overflow: autoAdjustOverflow,
+    offset: [0, -4],
+    targetOffset: targetOffset
+  },
+  rightTop: {
+    points: ['tl', 'tr'],
+    overflow: autoAdjustOverflow,
+    offset: [4, 0],
+    targetOffset: targetOffset
+  },
+  bottomRight: {
+    points: ['tr', 'br'],
+    overflow: autoAdjustOverflow,
+    offset: [0, 4],
+    targetOffset: targetOffset
+  },
+  rightBottom: {
+    points: ['bl', 'br'],
+    overflow: autoAdjustOverflow,
+    offset: [4, 0],
+    targetOffset: targetOffset
+  },
+  bottomLeft: {
+    points: ['tl', 'bl'],
+    overflow: autoAdjustOverflow,
+    offset: [0, 4],
+    targetOffset: targetOffset
+  },
+  leftBottom: {
+    points: ['br', 'bl'],
+    overflow: autoAdjustOverflow,
+    offset: [-4, 0],
+    targetOffset: targetOffset
+  }
+};
+
+exports['default'] = placements;
 
 /***/ })
 /******/ ]);

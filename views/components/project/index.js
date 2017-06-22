@@ -4,7 +4,7 @@ import ReactMixin from 'react-mixin';
 
 import { HashRouter, Route, Link } from 'react-router-dom';
 
-import { Row, Col, Card, Layout, Menu, Breadcrumb, Icon, Table, Collapse, Button, Input, Select, Checkbox} from 'antd';
+import { Row, Col, Card, Layout, Menu, Breadcrumb, Icon, Table, Collapse, Button, Input, Select, Checkbox, Popconfirm} from 'antd';
 const { Header, Content, Footer } = Layout;
 
 const SubMenu = Menu.SubMenu;
@@ -64,8 +64,16 @@ export default class Index extends Reflux.Component {
     Action.info(1);
     Action.menu(1);
   }
+  handleReqHeadTablDrop(index) {
+    console.log(index)
+    let reqHeadData = this.state.reqHeadData;
+    reqHeadData.splice(index, 1);
+    this.setState({
+      reqHeadData: reqHeadData
+    });
+  }
 
-  handleAdd() {
+  handleReqHeadTablAdd() {
     let reqHeadData = this.state.reqHeadData;
     let newData = {
       key: reqHeadData.length,
@@ -108,13 +116,22 @@ export default class Index extends Reflux.Component {
         dataIndex: 'optional',
         key: 'optional',
         render: text => <Checkbox />,
-
-
       }, {
         title: '默认值',
         dataIndex: 'defVal',
         key: 'defVal',
         render: text => '-',
+      }, {
+        title: 'operation',
+        dataIndex: 'operation',
+        key: 'operation',
+        render: (text, record, index) => {
+          return (
+            <Popconfirm title="Sure to delete?" onConfirm={() => this.handleReqHeadTablDrop(index) }>
+              <a href="#">Delete</a>
+            </Popconfirm>
+          )
+        }
       }
     ];
 
@@ -217,7 +234,9 @@ export default class Index extends Reflux.Component {
               <Row>
                 {
                   EDIT_MODE ?
-                    <Button className="editable-add-btn" onClick={this.handleAdd.bind(this)}>Add</Button>
+                    <div>
+                      <Button className="editable-add-btn" onClick={this.handleReqHeadTablAdd.bind(this) }>Add</Button>
+                    </div>
                     : ''
                 }
                 <Table
