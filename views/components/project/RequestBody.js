@@ -1,7 +1,7 @@
 import React from 'react';
 import Reflux from 'reflux';
 
-import { Row, Col, Card, Layout, Menu, Breadcrumb, Icon, Table, Collapse, Button, Input, Select, Checkbox, Popconfirm} from 'antd';
+import { Row, Col, Icon, Table, Checkbox, Popconfirm, Button} from 'antd';
 
 import Action from './action';
 import Store from './store';

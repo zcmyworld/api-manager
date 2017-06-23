@@ -3,7 +3,7 @@ import Reflux from 'reflux';
 
 import { HashRouter, Route, Link } from 'react-router-dom';
 
-import { Row, Col, Card, Layout, Menu, Breadcrumb, Icon, Table, Collapse, Button, Input, Select, Checkbox, Popconfirm} from 'antd';
+import { Row, Col, Card, Layout, Menu, Breadcrumb, Table, Button, Input, Select, Checkbox, Popconfirm} from 'antd';
 const { Header, Content, Footer } = Layout;
 
 const SubMenu = Menu.SubMenu;
@@ -12,6 +12,8 @@ import Store from './store';
 
 import RequestHeaders from './RequestHeaders';
 import RequestBody from './RequestBody';
+import Response from './Response';
+import ProjectMenu from './ProjectMenu';
 
 const REQ_BODY_COLUMN = [
   {
@@ -100,29 +102,7 @@ export default class Index extends Reflux.Component {
           routes={[{ breadcrumbName: 'Home', name: 'home', path: '/projects' }, { breadcrumbName: '项目名称', path: '/123' }]}/>
         <Row style={{ background: '#fff', padding: 24, minHeight: 1080, paddingBottom: 100 }}>
           <Col span={3}>
-            <Menu
-              theme='Light'
-              defaultOpenKeys={['sub1']}
-              mode="inline"
-              style={{ 'marginLeft': '-24px' }}
-              >
-              {
-                this.state.menu.map((item, idx) => {
-                  return (
-                    <SubMenu key={idx} title={<span><span>{item.name}</span></span>}>
-                      {
-                        item.childs.map((child_item, child_idx) => {
-                          return (
-                            <Menu.Item key={idx.toString() + child_idx.toString() }>{child_item.name}</Menu.Item>
-                          );
-                        })
-                      }
-                    </SubMenu>
-                  )
-                })
-
-              }
-            </Menu>
+            <ProjectMenu />
           </Col>
           <Col span={21}>
             <div style={{ 'marginLeft': '30px' }}>
@@ -188,52 +168,7 @@ export default class Index extends Reflux.Component {
               </Row>
               <RequestHeaders/>
               <RequestBody/>
-              <Row className='api-title'>
-                <h2>Response</h2>
-              </Row>
-              {
-                this.state.project.res.map((item, idx) => {
-                  let resHeadData = [];
-                  item.header.map((item, idx) => {
-                    resHeadData.push({
-                      key: idx,
-                      arg: item.arg,
-                      des: item.des
-                    })
-                  })
-
-                  return (
-                    <div key={idx}>
-                      <Row className='api-title'>
-                        <h2>{item.type}</h2>
-                      </Row>
-                      <Row className='api-title'>
-                        <h2>Response Header</h2>
-                      </Row>
-                      <Row>
-                        <Table
-                          dataSource={resHeadData}
-                          columns={RES_HEADER_COLUMN}
-                          bordered
-                          size='small'
-                          pagination={false}
-                          />
-                      </Row>
-                      <Row className='api-title'>
-                        <h2>Response Body</h2>
-                      </Row>
-                      <Row>
-                        <pre>
-                          {JSON.stringify(item.body, null, 2) }
-                        </pre>
-                      </Row>
-
-                    </div>
-
-                  )
-                })
-              }
-
+              <Response/>
             </div>
           </Col>
         </Row>
