@@ -18,10 +18,16 @@ export default class Res extends Reflux.Component {
   componentDidMount() {
   }
 
-  drop(index) {
-    // let reqHeadData = this.state.reqHeadData;
-    // reqHeadData.splice(index, 1);
-    // Action.setKeyValue('reqHeadData', reqHeadData);
+  drop(id, index) {
+    let resGroup = this.state.project.res;
+    for (let i in resGroup) {
+      let res = resGroup[i];
+      if (id == res.id) {
+        resGroup[i].header.splice(index, 1)
+        console.log(resGroup[i])
+      }
+    }
+    Action.setKeyValue('res', resGroup);
   }
 
   add(id) {
@@ -58,8 +64,9 @@ export default class Res extends Reflux.Component {
         dataIndex: 'operation',
         key: 'operation',
         render: (text, record, index) => {
+
           return (
-            <Popconfirm title="Sure to delete?" onConfirm={() => this.drop(index) }>
+            <Popconfirm title="Sure to delete?" onConfirm={() => this.drop(record.id, index) }>
               <a href="#">Delete</a>
             </Popconfirm>
           )
@@ -75,11 +82,12 @@ export default class Res extends Reflux.Component {
           {
             this.state.project.res.map((item, idx) => {
               let resHeadData = [];
-              item.header.map((item, idx) => {
+              item.header.map((header_item, idx) => {
                 resHeadData.push({
                   key: idx,
-                  arg: item.arg,
-                  des: item.des
+                  arg: header_item.arg,
+                  des: header_item.des,
+                  id: item.id
                 })
               })
               return (

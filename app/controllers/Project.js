@@ -19,16 +19,13 @@ class Project {
           defVal: '-'
         }
       ],
-      reqBody: [{
-        arg: 'projectId',
-        des: '项目id',
-        type: 'string',
-        defVal: '-',
-        optional: '必填'
-      }],
+      reqBody: {
+        projectId: '1'
+      },
       res: [
         {
-          type: '正确返回',
+          id: 1,
+          name: '正确返回',
           header: [{
             arg: 'token',
             des: '获取成功的令牌',
@@ -44,7 +41,19 @@ class Project {
           ]
         },
         {
-          type: '错误返回',
+          id: 2,
+          name: '密码错误返回',
+          header: [{
+            arg: 'token',
+            des: '获取成功的令牌',
+          }],
+          body: {
+            error: 'error projectId'
+          }
+        },
+        {
+          id: 3,
+          name: '用户名返回',
           header: [{
             arg: 'token',
             des: '获取成功的令牌',
