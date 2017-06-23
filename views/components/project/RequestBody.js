@@ -15,62 +15,7 @@ export default class RequestBody extends Reflux.Component {
   componentDidMount() {
   }
 
-  drop(index) {
-    let reqBodyData = this.state.reqBodyData;
-    reqBodyData.splice(index, 1);
-    Action.setKeyValue('reqBodyData', reqBodyData);
-  }
-
-  add() {
-    let reqBodyData = this.state.reqBodyData;
-    let newData = {
-      key: reqBodyData.length,
-      arg: '',
-      des: '',
-    };
-    Action.setKeyValue('reqBodyData', reqBodyData.concat([newData]));
-  }
-
   render() {
-    let REQ_BODY_COLUMN = [
-      {
-        title: '参数',
-        dataIndex: 'arg',
-        key: 'arg'
-      }, {
-        title: '说明',
-        dataIndex: 'des',
-        key: 'des',
-      }, {
-        title: '类型',
-        dataIndex: 'type',
-        key: 'type',
-      }, {
-        title: '可选',
-        dataIndex: 'optional',
-        key: 'optional'
-
-      }, {
-        title: '默认值',
-        dataIndex: 'defVal',
-        key: 'defVal',
-      }
-    ];
-    if (this.state.EDIT_MODE) {
-      REQ_BODY_COLUMN.push({
-        title: 'operation',
-        dataIndex: 'operation',
-        key: 'operation',
-        render: (text, record, index) => {
-          return (
-            <Popconfirm title="Sure to delete?" onConfirm={() => this.drop(index) }>
-              <a href="#">Delete</a>
-            </Popconfirm>
-          )
-        }
-      });
-    }
-
     return (
       <div>
         <Row className='api-title'>
@@ -79,20 +24,9 @@ export default class RequestBody extends Reflux.Component {
           </h2>
         </Row>
         <Row>
-          {
-            this.state.EDIT_MODE ?
-              <div>
-                <Button className="editable-add-btn" onClick={this.add.bind(this) }>Add</Button>
-              </div>
-              : ''
-          }
-          <Table
-            dataSource={this.state.reqBodyData}
-            columns={REQ_BODY_COLUMN}
-            bordered
-            size='small'
-            pagination={false}
-            />
+          <pre>
+            {JSON.stringify(this.state.project.reqBody, null, 2) }
+          </pre>
         </Row>
       </div>
     );

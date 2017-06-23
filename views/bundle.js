@@ -72353,39 +72353,6 @@ const SubMenu = __WEBPACK_IMPORTED_MODULE_6_antd_lib_menu___default.a.SubMenu;
 
 
 
-const REQ_BODY_COLUMN = [{
-  title: '参数',
-  dataIndex: 'arg',
-  key: 'arg'
-}, {
-  title: '说明',
-  dataIndex: 'des',
-  key: 'des'
-}, {
-  title: '类型',
-  dataIndex: 'type',
-  key: 'type'
-}, {
-  title: '可选',
-  dataIndex: 'optional',
-  key: 'optional'
-
-}, {
-  title: '默认值',
-  dataIndex: 'defVal',
-  key: 'defVal'
-}];
-
-const RES_HEADER_COLUMN = [{
-  title: '参数',
-  dataIndex: 'arg',
-  key: 'arg'
-}, {
-  title: '说明',
-  dataIndex: 'des',
-  key: 'des'
-}];
-
 class Index extends __WEBPACK_IMPORTED_MODULE_9_reflux___default.a.Component {
   constructor(props) {
     super(props);
@@ -72395,28 +72362,6 @@ class Index extends __WEBPACK_IMPORTED_MODULE_9_reflux___default.a.Component {
   componentDidMount() {
     __WEBPACK_IMPORTED_MODULE_11__action__["a" /* default */].info(1);
     __WEBPACK_IMPORTED_MODULE_11__action__["a" /* default */].menu(1);
-  }
-
-  handleReqHeadTablDrop(index) {
-    let reqHeadData = this.state.reqHeadData;
-    reqHeadData.splice(index, 1);
-
-    // Need to use Action to set data
-    this.setState({
-      reqHeadData: reqHeadData
-    });
-  }
-
-  handleReqHeadTablAdd() {
-    let reqHeadData = this.state.reqHeadData;
-    let newData = {
-      key: reqHeadData.length,
-      arg: '',
-      des: ''
-    };
-    this.setState({
-      reqHeadData: reqHeadData.concat([newData])
-    });
   }
 
   render() {
@@ -72594,22 +72539,9 @@ class Store extends __WEBPACK_IMPORTED_MODULE_0_reflux___default.a.Store {
         });
       });
 
-      let reqBodyData = [];
-      project.reqBody.map((item, idx) => {
-        reqBodyData.push({
-          key: idx,
-          arg: item.arg,
-          type: item.type,
-          des: item.des,
-          defVal: item.defVal,
-          optional: item.optional
-        });
-      });
-
       this.setState({
         project: project,
         reqHeadData: reqHeadData,
-        reqBodyData: reqBodyData,
         EDIT_MODE: true
       });
     });
@@ -74350,6 +74282,63 @@ class RequestHeaders extends __WEBPACK_IMPORTED_MODULE_6_reflux___default.a.Comp
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_antd_lib_row__ = __webpack_require__(153);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_antd_lib_row___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_antd_lib_row__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_reflux__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_reflux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_reflux__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__action__ = __webpack_require__(282);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__store__ = __webpack_require__(662);
+
+
+
+
+
+
+
+class RequestBody extends __WEBPACK_IMPORTED_MODULE_2_reflux___default.a.Component {
+  constructor(props) {
+    super(props);
+    this.stores = [__WEBPACK_IMPORTED_MODULE_4__store__["a" /* default */]];
+  }
+
+  componentDidMount() {}
+
+  render() {
+    return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+      'div',
+      null,
+      __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+        __WEBPACK_IMPORTED_MODULE_0_antd_lib_row___default.a,
+        { className: 'api-title' },
+        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+          'h2',
+          null,
+          'Request Body'
+        )
+      ),
+      __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+        __WEBPACK_IMPORTED_MODULE_0_antd_lib_row___default.a,
+        null,
+        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+          'pre',
+          null,
+          JSON.stringify(this.state.project.reqBody, null, 2)
+        )
+      )
+    );
+  }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = RequestBody;
+
+
+/***/ }),
+/* 681 */,
+/* 682 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_antd_lib_table__ = __webpack_require__(536);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_antd_lib_table___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_antd_lib_table__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_antd_lib_button__ = __webpack_require__(255);
@@ -74374,7 +74363,7 @@ class RequestHeaders extends __WEBPACK_IMPORTED_MODULE_6_reflux___default.a.Comp
 
 
 
-class RequestBody extends __WEBPACK_IMPORTED_MODULE_5_reflux___default.a.Component {
+class Res extends __WEBPACK_IMPORTED_MODULE_5_reflux___default.a.Component {
   constructor(props) {
     super(props);
     this.stores = [__WEBPACK_IMPORTED_MODULE_7__store__["a" /* default */]];
@@ -74383,23 +74372,29 @@ class RequestBody extends __WEBPACK_IMPORTED_MODULE_5_reflux___default.a.Compone
   componentDidMount() {}
 
   drop(index) {
-    let reqBodyData = this.state.reqBodyData;
-    reqBodyData.splice(index, 1);
-    __WEBPACK_IMPORTED_MODULE_6__action__["a" /* default */].setKeyValue('reqBodyData', reqBodyData);
+    // let reqHeadData = this.state.reqHeadData;
+    // reqHeadData.splice(index, 1);
+    // Action.setKeyValue('reqHeadData', reqHeadData);
   }
 
-  add() {
-    let reqBodyData = this.state.reqBodyData;
-    let newData = {
-      key: reqBodyData.length,
-      arg: '',
-      des: ''
-    };
-    __WEBPACK_IMPORTED_MODULE_6__action__["a" /* default */].setKeyValue('reqBodyData', reqBodyData.concat([newData]));
+  add(id) {
+    let resGroup = this.state.project.res;
+    for (let i in resGroup) {
+      let res = resGroup[i];
+      if (id == res.id) {
+        let newData = [{
+          key: resGroup[i].header.length,
+          arg: '',
+          des: ''
+        }];
+        resGroup[i].header = resGroup[i].header.concat(newData);
+      }
+    }
+    __WEBPACK_IMPORTED_MODULE_6__action__["a" /* default */].setKeyValue('res', resGroup);
   }
 
   render() {
-    let REQ_BODY_COLUMN = [{
+    let RES_HEADER_COLUMN = [{
       title: '参数',
       dataIndex: 'arg',
       key: 'arg'
@@ -74407,22 +74402,9 @@ class RequestBody extends __WEBPACK_IMPORTED_MODULE_5_reflux___default.a.Compone
       title: '说明',
       dataIndex: 'des',
       key: 'des'
-    }, {
-      title: '类型',
-      dataIndex: 'type',
-      key: 'type'
-    }, {
-      title: '可选',
-      dataIndex: 'optional',
-      key: 'optional'
-
-    }, {
-      title: '默认值',
-      dataIndex: 'defVal',
-      key: 'defVal'
     }];
     if (this.state.EDIT_MODE) {
-      REQ_BODY_COLUMN.push({
+      RES_HEADER_COLUMN.push({
         title: 'operation',
         dataIndex: 'operation',
         key: 'operation',
@@ -74438,124 +74420,17 @@ class RequestBody extends __WEBPACK_IMPORTED_MODULE_5_reflux___default.a.Compone
           );
         }
       });
-    }
-
+    };
     return __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
       'div',
       null,
       __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
         __WEBPACK_IMPORTED_MODULE_2_antd_lib_row___default.a,
-        { className: 'api-title' },
+        null,
         __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
-          'h2',
-          null,
-          'Request Body'
-        )
-      ),
-      __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
-        __WEBPACK_IMPORTED_MODULE_2_antd_lib_row___default.a,
-        null,
-        this.state.EDIT_MODE ? __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
-          'div',
-          null,
-          __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
-            __WEBPACK_IMPORTED_MODULE_1_antd_lib_button___default.a,
-            { className: 'editable-add-btn', onClick: this.add.bind(this) },
-            'Add'
-          )
-        ) : '',
-        __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0_antd_lib_table___default.a, {
-          dataSource: this.state.reqBodyData,
-          columns: REQ_BODY_COLUMN,
-          bordered: true,
-          size: 'small',
-          pagination: false
-        })
-      )
-    );
-  }
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = RequestBody;
-
-
-/***/ }),
-/* 681 */,
-/* 682 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_antd_lib_table__ = __webpack_require__(536);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_antd_lib_table___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_antd_lib_table__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_antd_lib_row__ = __webpack_require__(153);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_antd_lib_row___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_antd_lib_row__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_reflux__ = __webpack_require__(63);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_reflux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_reflux__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__action__ = __webpack_require__(282);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__store__ = __webpack_require__(662);
-
-
-
-
-
-
-
-
-const RES_HEADER_COLUMN = [{
-  title: '参数',
-  dataIndex: 'arg',
-  key: 'arg'
-}, {
-  title: '说明',
-  dataIndex: 'des',
-  key: 'des'
-}];
-
-class Res extends __WEBPACK_IMPORTED_MODULE_3_reflux___default.a.Component {
-  constructor(props) {
-    super(props);
-    this.stores = [__WEBPACK_IMPORTED_MODULE_5__store__["a" /* default */]];
-  }
-
-  componentDidMount() {}
-
-  drop(index) {
-    // let reqHeadData = this.state.reqHeadData;
-    // reqHeadData.splice(index, 1);
-    // Action.setKeyValue('reqHeadData', reqHeadData);
-  }
-
-  add() {
-    // let reqHeadData = this.state.reqHeadData;
-    // let newData = {
-    //   key: reqHeadData.length,
-    //   arg: '',
-    //   des: '',
-    // };
-    // Action.setKeyValue('reqHeadData', reqHeadData.concat([newData]));
-  }
-
-  render() {
-    return __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
-      'div',
-      null,
-      __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
-        __WEBPACK_IMPORTED_MODULE_1_antd_lib_row___default.a,
-        { className: 'api-title' },
-        __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
-          'h2',
-          null,
-          'Request Headers'
-        )
-      ),
-      __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
-        __WEBPACK_IMPORTED_MODULE_1_antd_lib_row___default.a,
-        null,
-        __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
-          __WEBPACK_IMPORTED_MODULE_1_antd_lib_row___default.a,
+          __WEBPACK_IMPORTED_MODULE_2_antd_lib_row___default.a,
           { className: 'api-title' },
-          __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
             'h2',
             null,
             'Response'
@@ -74570,32 +74445,40 @@ class Res extends __WEBPACK_IMPORTED_MODULE_3_reflux___default.a.Component {
               des: item.des
             });
           });
-
-          return __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+          return __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
             'div',
             { key: idx },
-            __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_antd_lib_row___default.a,
+            __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_2_antd_lib_row___default.a,
               { className: 'api-title' },
-              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
                 'h2',
                 null,
-                item.type
+                item.name
               )
             ),
-            __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_antd_lib_row___default.a,
+            __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_2_antd_lib_row___default.a,
               { className: 'api-title' },
-              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
                 'h2',
                 null,
                 'Response Header'
               )
             ),
-            __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_antd_lib_row___default.a,
+            this.state.EDIT_MODE ? __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
+              'div',
               null,
-              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0_antd_lib_table___default.a, {
+              __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_1_antd_lib_button___default.a,
+                { className: 'editable-add-btn', onClick: () => this.add(item.id) },
+                'Add'
+              )
+            ) : '',
+            __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_2_antd_lib_row___default.a,
+              null,
+              __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_0_antd_lib_table___default.a, {
                 dataSource: resHeadData,
                 columns: RES_HEADER_COLUMN,
                 bordered: true,
@@ -74603,19 +74486,19 @@ class Res extends __WEBPACK_IMPORTED_MODULE_3_reflux___default.a.Component {
                 pagination: false
               })
             ),
-            __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_antd_lib_row___default.a,
+            __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_2_antd_lib_row___default.a,
               { className: 'api-title' },
-              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
                 'h2',
                 null,
                 'Response Body'
               )
             ),
-            __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_antd_lib_row___default.a,
+            __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_2_antd_lib_row___default.a,
               null,
-              __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
                 'pre',
                 null,
                 JSON.stringify(item.body, null, 2)

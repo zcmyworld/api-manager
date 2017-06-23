@@ -15,51 +15,10 @@ import RequestBody from './RequestBody';
 import Response from './Response';
 import ProjectMenu from './ProjectMenu';
 
-const REQ_BODY_COLUMN = [
-  {
-    title: '参数',
-    dataIndex: 'arg',
-    key: 'arg'
-  }, {
-    title: '说明',
-    dataIndex: 'des',
-    key: 'des',
-  }, {
-    title: '类型',
-    dataIndex: 'type',
-    key: 'type',
-  }, {
-    title: '可选',
-    dataIndex: 'optional',
-    key: 'optional'
-
-  }, {
-    title: '默认值',
-    dataIndex: 'defVal',
-    key: 'defVal',
-  }
-];
-
-
-
-const RES_HEADER_COLUMN = [
-  {
-    title: '参数',
-    dataIndex: 'arg',
-    key: 'arg'
-  }, {
-    title: '说明',
-    dataIndex: 'des',
-    key: 'des',
-  }
-];
-
-
 export default class Index extends Reflux.Component {
   constructor(props) {
     super(props);
     this.stores = [Store];
-
   }
 
   componentDidMount() {
@@ -67,33 +26,10 @@ export default class Index extends Reflux.Component {
     Action.menu(1);
   }
 
-  handleReqHeadTablDrop(index) {
-    let reqHeadData = this.state.reqHeadData;
-    reqHeadData.splice(index, 1);
-
-    // Need to use Action to set data
-    this.setState({
-      reqHeadData: reqHeadData
-    });
-  }
-
-  handleReqHeadTablAdd() {
-    let reqHeadData = this.state.reqHeadData;
-    let newData = {
-      key: reqHeadData.length,
-      arg: '',
-      des: '',
-    };
-    this.setState({
-      reqHeadData: reqHeadData.concat([newData]),
-    });
-  }
-
   render() {
     if (!this.state.project || !this.state.menu) {
       return null;
     }
-
 
     return (
       <div>
