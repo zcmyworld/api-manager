@@ -6,32 +6,6 @@ import { Row, Col, Card, Layout, Menu, Breadcrumb, Icon, Table, Collapse, Button
 import Action from './action';
 import Store from './store';
 
-const REQ_BODY_COLUMN = [
-  {
-    title: '参数',
-    dataIndex: 'arg',
-    key: 'arg'
-  }, {
-    title: '说明',
-    dataIndex: 'des',
-    key: 'des',
-  }, {
-    title: '类型',
-    dataIndex: 'type',
-    key: 'type',
-  }, {
-    title: '可选',
-    dataIndex: 'optional',
-    key: 'optional'
-
-  }, {
-    title: '默认值',
-    dataIndex: 'defVal',
-    key: 'defVal',
-  }
-];
-
-
 export default class RequestHeaders extends Reflux.Component {
   constructor(props) {
     super(props);
@@ -41,13 +15,13 @@ export default class RequestHeaders extends Reflux.Component {
   componentDidMount() {
   }
 
-  handleReqHeadTablDrop(index) {
+  drop(index) {
     let reqHeadData = this.state.reqHeadData;
     reqHeadData.splice(index, 1);
     Action.setKeyValue('reqHeadData', reqHeadData);
   }
 
-  handleReqHeadTablAdd() {
+  add() {
     let reqHeadData = this.state.reqHeadData;
     let newData = {
       key: reqHeadData.length,
@@ -87,7 +61,7 @@ export default class RequestHeaders extends Reflux.Component {
         key: 'operation',
         render: (text, record, index) => {
           return (
-            <Popconfirm title="Sure to delete?" onConfirm={() => this.handleReqHeadTablDrop(index) }>
+            <Popconfirm title="Sure to delete?" onConfirm={() => this.drop(index) }>
               <a href="#">Delete</a>
             </Popconfirm>
           )
@@ -103,7 +77,7 @@ export default class RequestHeaders extends Reflux.Component {
           {
             this.state.EDIT_MODE ?
               <div>
-                <Button className="editable-add-btn" onClick={this.handleReqHeadTablAdd.bind(this) }>Add</Button>
+                <Button className="editable-add-btn" onClick={() => this.add() }>Add</Button>
               </div>
               : ''
           }
