@@ -64,6 +64,7 @@ export default class Index extends Reflux.Component {
     Action.info(1);
     Action.menu(1);
   }
+  
   handleReqHeadTablDrop(index) {
     console.log(index)
     let reqHeadData = this.state.reqHeadData;
@@ -121,7 +122,11 @@ export default class Index extends Reflux.Component {
         dataIndex: 'defVal',
         key: 'defVal',
         render: text => '-',
-      }, {
+      }
+    ];
+
+    if (EDIT_MODE) {
+      REQ_HEADER_COLUMN.push({
         title: 'operation',
         dataIndex: 'operation',
         key: 'operation',
@@ -132,8 +137,8 @@ export default class Index extends Reflux.Component {
             </Popconfirm>
           )
         }
-      }
-    ];
+      });
+    }
 
     return (
       <div>
