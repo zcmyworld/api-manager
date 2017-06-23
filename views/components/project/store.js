@@ -21,7 +21,8 @@ export default class Store extends Reflux.Store {
       })
       this.setState({
         project: project,
-        reqHeadData: reqHeadData
+        reqHeadData: reqHeadData,
+        EDIT_MODE: true
       })
     })
   }
@@ -32,5 +33,11 @@ export default class Store extends Reflux.Store {
         menu: menu
       })
     })
+  }
+
+  onSetKeyValue(key, value) {
+    let obj = {};
+    obj[key] = value;
+    this.setState(obj)
   }
 }

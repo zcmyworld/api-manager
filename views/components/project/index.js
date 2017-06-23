@@ -1,6 +1,5 @@
 import React from 'react';
 import Reflux from 'reflux';
-import ReactMixin from 'react-mixin';
 
 import { HashRouter, Route, Link } from 'react-router-dom';
 
@@ -10,6 +9,9 @@ const { Header, Content, Footer } = Layout;
 const SubMenu = Menu.SubMenu;
 import Action from './action';
 import Store from './store';
+
+import RequestHeaders from './RequestHeaders';
+import RequestBody from './RequestBody';
 
 const REQ_BODY_COLUMN = [
   {
@@ -50,8 +52,6 @@ const RES_HEADER_COLUMN = [
   }
 ];
 
-var EDIT_MODE = true;
-// var EDIT_MODE = false;
 
 export default class Index extends Reflux.Component {
   constructor(props) {
@@ -64,11 +64,12 @@ export default class Index extends Reflux.Component {
     Action.info(1);
     Action.menu(1);
   }
-  
+
   handleReqHeadTablDrop(index) {
-    console.log(index)
     let reqHeadData = this.state.reqHeadData;
     reqHeadData.splice(index, 1);
+
+    // Need to use Action to set data
     this.setState({
       reqHeadData: reqHeadData
     });
@@ -102,43 +103,6 @@ export default class Index extends Reflux.Component {
         optional: item.optional
       })
     })
-
-    let REQ_HEADER_COLUMN = [
-      {
-        title: '参数',
-        dataIndex: 'arg',
-        key: 'arg'
-      }, {
-        title: '说明',
-        dataIndex: 'des',
-        key: 'des',
-      }, {
-        title: '可选',
-        dataIndex: 'optional',
-        key: 'optional',
-        render: text => <Checkbox />,
-      }, {
-        title: '默认值',
-        dataIndex: 'defVal',
-        key: 'defVal',
-        render: text => '-',
-      }
-    ];
-
-    if (EDIT_MODE) {
-      REQ_HEADER_COLUMN.push({
-        title: 'operation',
-        dataIndex: 'operation',
-        key: 'operation',
-        render: (text, record, index) => {
-          return (
-            <Popconfirm title="Sure to delete?" onConfirm={() => this.handleReqHeadTablDrop(index) }>
-              <a href="#">Delete</a>
-            </Popconfirm>
-          )
-        }
-      });
-    }
 
     return (
       <div>
@@ -176,7 +140,7 @@ export default class Index extends Reflux.Component {
               <Row>
                 <Col style={{ 'float': 'left' }}>
                   {
-                    EDIT_MODE ?
+                    this.state.EDIT_MODE ?
                       <div>
                         <Input defaultValue={this.state.project.title}/>
                       </div>
@@ -189,7 +153,7 @@ export default class Index extends Reflux.Component {
               </Row>
               <Row>
                 {
-                  EDIT_MODE ?
+                  this.state.EDIT_MODE ?
                     <div>
                       <Input type='textarea' defaultValue={this.state.project.des}/>
                     </div>
@@ -203,7 +167,7 @@ export default class Index extends Reflux.Component {
                 <h2>
                   <span>调用地址: </span>
                   {
-                    EDIT_MODE ?
+                    this.state.EDIT_MODE ?
                       <div>
                         <Input defaultValue={this.state.project.route}/>
                       </div>
@@ -218,7 +182,7 @@ export default class Index extends Reflux.Component {
                 <h2>
                   <span>调用方式: </span>
                   {
-                    EDIT_MODE ?
+                    this.state.EDIT_MODE ?
                       <Select defaultValue={this.state.project.method} style={{ width: 120 }}>
                         <Option value="GET">GET</Option>
                         <Option value="POST">POST</Option>
@@ -233,25 +197,8 @@ export default class Index extends Reflux.Component {
                   }
                 </h2>
               </Row>
-              <Row className='api-title'>
-                <h2>Request Headers</h2>
-              </Row>
-              <Row>
-                {
-                  EDIT_MODE ?
-                    <div>
-                      <Button className="editable-add-btn" onClick={this.handleReqHeadTablAdd.bind(this) }>Add</Button>
-                    </div>
-                    : ''
-                }
-                <Table
-                  dataSource={this.state.reqHeadData}
-                  columns={REQ_HEADER_COLUMN}
-                  bordered
-                  size='small'
-                  pagination={false}
-                  />
-              </Row>
+              <RequestHeaders/>
+              <RequestBody/>
               <Row className='api-title'>
                 <h2>
                   Request Body
