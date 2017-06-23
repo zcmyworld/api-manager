@@ -19,9 +19,23 @@ export default class Store extends Reflux.Store {
           des: item.des
         })
       })
+
+      let reqBodyData = []
+      project.reqBody.map((item, idx) => {
+        reqBodyData.push({
+          key: idx,
+          arg: item.arg,
+          type: item.type,
+          des: item.des,
+          defVal: item.defVal,
+          optional: item.optional
+        })
+      })
+
       this.setState({
         project: project,
         reqHeadData: reqHeadData,
+        reqBodyData: reqBodyData,
         EDIT_MODE: true
       })
     })

@@ -92,17 +92,6 @@ export default class Index extends Reflux.Component {
       return null;
     }
 
-    let reqBodyData = []
-    this.state.project.reqBody.map((item, idx) => {
-      reqBodyData.push({
-        key: idx,
-        arg: item.arg,
-        type: item.type,
-        des: item.des,
-        defVal: item.defVal,
-        optional: item.optional
-      })
-    })
 
     return (
       <div>
@@ -199,20 +188,6 @@ export default class Index extends Reflux.Component {
               </Row>
               <RequestHeaders/>
               <RequestBody/>
-              <Row className='api-title'>
-                <h2>
-                  Request Body
-                </h2>
-              </Row>
-              <Row>
-                <Table
-                  dataSource={reqBodyData}
-                  columns={REQ_BODY_COLUMN}
-                  bordered
-                  size='small'
-                  pagination={false}
-                  />
-              </Row>
               <Row className='api-title'>
                 <h2>Response</h2>
               </Row>
