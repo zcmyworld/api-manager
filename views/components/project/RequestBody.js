@@ -1,7 +1,7 @@
 import React from 'react';
 import Reflux from 'reflux';
 
-import { Row, Col, Icon, Table, Checkbox, Popconfirm, Button} from 'antd';
+import { Row, Col, Icon, Table, Checkbox, Popconfirm, Button, Input} from 'antd';
 
 import Action from './action';
 import Store from './store';
@@ -27,6 +27,16 @@ export default class RequestBody extends Reflux.Component {
           <pre>
             {JSON.stringify(this.state.project.reqBody, null, 2) }
           </pre>
+        </Row>
+        <Row>
+          {
+            this.state.EDIT_MODE ?
+              <Input type='textarea' autosize={true} defaultValue={JSON.stringify(this.state.project.reqBody, null, 2) }/>
+              :
+              <pre >
+                { JSON.stringify(this.state.project.reqBody, null, 2) }
+              </pre>
+          }
         </Row>
       </div>
     );

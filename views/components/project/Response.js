@@ -6,6 +6,8 @@ import { Row, Col, Card, Layout, Menu, Breadcrumb, Icon, Table, Collapse, Button
 import Action from './action';
 import Store from './store';
 
+import ContentEditable from './../base/ContentEditable';
+
 
 
 
@@ -46,6 +48,13 @@ export default class Res extends Reflux.Component {
     Action.setKeyValue('res', resGroup);
   }
 
+  onChange() {
+    console.log(this.refs)
+    console.log('change')
+    // var html = this.getDOMNode().innerHTML;
+
+  }
+
   render() {
     let RES_HEADER_COLUMN = [
       {
@@ -56,6 +65,15 @@ export default class Res extends Reflux.Component {
         title: '说明',
         dataIndex: 'des',
         key: 'des',
+        render: (text, record, index) => {
+          return (
+            <div
+              ref='ContentEditable'
+              onInput={() => this.onChange() }
+              contentEditable
+              dangerouslySetInnerHTML={{ __html: text }}></div>
+          )
+        }
       }
     ];
     if (this.state.EDIT_MODE) {
@@ -64,7 +82,6 @@ export default class Res extends Reflux.Component {
         dataIndex: 'operation',
         key: 'operation',
         render: (text, record, index) => {
-
           return (
             <Popconfirm title="Sure to delete?" onConfirm={() => this.drop(record.id, index) }>
               <a href="#">Delete</a>
@@ -118,9 +135,14 @@ export default class Res extends Reflux.Component {
                     <h2>Response Body</h2>
                   </Row>
                   <Row>
-                    <pre>
-                      {JSON.stringify(item.body, null, 2) }
-                    </pre>
+                    {
+                      this.state.EDIT_MODE ?
+                        <Input type='textarea' autosize={true} defaultValue={JSON.stringify(item.body, null, 2) }/>
+                        :
+                        <pre >
+                          { JSON.stringify(item.body, null, 2) }
+                        </pre>
+                    }
                   </Row>
 
                 </div>
